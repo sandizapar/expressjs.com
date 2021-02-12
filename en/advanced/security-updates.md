@@ -5,8 +5,6 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/security-updates.html"
 ---
-<div id="page-doc" markdown="1">
-
 # Security updates
 
 <div class="doc-box doc-notice" markdown="1">
@@ -16,10 +14,19 @@ Node.js vulnerabilities directly affect Express. Therefore [keep a watch on Node
 The list below enumerates the Express vulnerabilities that were fixed in the specified version update.
 
 **NOTE**: If you believe you have discovered a security vulnerability in Express, please see
-[Security Policies and Procedures](https://github.com/strongloop/express/blob/master/Security.md).
+[Security Policies and Procedures](/{{page.lang}}/resources/contributing.html#security-policies-and-procedures).
 
 ## 4.x
 
+  * 4.16.0
+    * The dependency `forwarded` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/527). This may affect your application if the following APIs are used: `req.host`, `req.hostname`, `req.ip`, `req.ips`, `req.protocol`.
+    * The dependency `mime` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/535), but this issue does not impact Express.
+    * The dependency `send` has been updated to provide a protection against a [Node.js 8.5.0 vulnerability](https://nodejs.org/en/blog/vulnerability/september-2017-path-validation/). This only impacts running Express on the specific Node.js version 8.5.0.
+  * 4.15.5
+    * The dependency `debug` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:debug:20170905), but this issue does not impact Express.
+    * The dependency `fresh` has been updated to address a [vulnerability](https://nodesecurity.io/advisories/526). This will affect your application if the following APIs are used: `express.static`, `req.fresh`, `res.json`, `res.jsonp`, `res.send`, `res.sendfile` `res.sendFile`, `res.sendStatus`.
+  * 4.15.3
+    * The dependency `ms` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:ms:20170412). This may affect your application if untrusted string input is passed to the `maxAge` option in the following APIs: `express.static`, `res.sendfile`, and `res.sendFile`.
   * 4.15.2
     * The dependency `qs` has been updated to address a [vulnerability](https://snyk.io/vuln/npm:qs:20170213), but this issue does not impact Express. Updating to 4.15.2 is a good practice, but not required to address the vulnerability.
   * 4.11.1
@@ -55,4 +62,3 @@ The list below enumerates the Express vulnerabilities that were fixed in the spe
     * Extremely nested query string objects could cause the process to block and make the server unresponsive temporarily.
   * 3.3.0
     * The 404 response of an unsupported method override attempt was susceptible to cross-site scripting attacks.
-</div>

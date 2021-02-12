@@ -32,8 +32,8 @@ Express 4에서는 여러 중요한 부분이 변경되었습니다.
 
 또한 다음을 참조하십시오.
 
-* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [New features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Express 코어 및 미들웨어 시스템에 대한 변경
@@ -340,7 +340,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
@@ -379,7 +379,7 @@ http.createServer(app).listen(app.get('port'), function(){
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
 </code>
@@ -389,13 +389,13 @@ http.createServer(app).listen(app.get('port'), function(){
 프로세스
 </h3>
 
-다음의 명령을 통해 Express 4에 필요한 미들웨어를 설치하고 Express 및 Jade를
+다음의 명령을 통해 Express 4에 필요한 미들웨어를 설치하고 Express 및 Pug를
 각각 최신 버전으로 업데이트하여 마이그레이션 프로세스를
 시작하십시오.
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 </code>
 </pre>
 
@@ -434,7 +434,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^2.0.0-beta6",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
@@ -470,7 +470,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());

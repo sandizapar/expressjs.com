@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-template-engines.html"
 ---
-<div id="page-doc" markdown="1">
 # Using template engines with Express
 
 A _template engine_ enables you to use static template files in your application.   At runtime, the template engine replaces
@@ -16,7 +15,7 @@ Some popular template engines that work with Express are [Pug](https://pugjs.org
 [Mustache](https://www.npmjs.com/package/mustache), and [EJS](https://www.npmjs.com/package/ejs).
 The [Express application generator](/{{ page.lang }}/starter/generator.html) uses [Jade](https://www.npmjs.com/package/jade) as its default, but it also supports several others.
 
-See [Template Engines (Express wiki)](https://github.com/strongloop/express/wiki#template-engines)
+See [Template Engines (Express wiki)](https://github.com/expressjs/express/wiki#template-engines)
 for a list of template engines you can use with Express.
 See also [Comparing JavaScript Templating Engines: Jade, Mustache, Dust and More](https://strongloop.com/strongblog/compare-javascript-templates-jade-mustache-dust/).
 
@@ -72,6 +71,7 @@ app.get('/', function (req, res) {
 
 When you make a request to the home page, the `index.pug` file will be rendered as HTML.
 
+Note: The view engine cache does not cache the contents of the template's output, only the underlying template itself. The view is still re-rendered with every request even when the cache is on.
+
 To learn more about how template engines work in Express, see:
 ["Developing template engines for Express"](/{{ page.lang }}/advanced/developing-template-engines.html).
-</div>

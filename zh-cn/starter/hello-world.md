@@ -17,16 +17,17 @@ lang: zh-cn
 
 <pre>
 <code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
+const express = require('express')
+const app = express()
+const port = 3000
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
 </code>
 </pre>
 
@@ -44,5 +45,5 @@ $ node app.js
 </code>
 </pre>
 
-然后，在浏览器中装入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
+然后，在浏览器中输入 [http://localhost:3000/](http://localhost:3000/) 以查看输出。
 

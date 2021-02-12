@@ -32,8 +32,8 @@ Express 4, на самом деле, ломает существующий ко�
 
 См. также:
 
-* [Новые функции в 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Миграция из 3.x в 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [Новые функции в 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Миграция из 3.x в 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Изменения ядра Express и системы промежуточных обработчиков
@@ -325,7 +325,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.methodOverride());
@@ -363,7 +363,7 @@ http.createServer(app).listen(app.get('port'), function(){
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
 </code>
@@ -373,11 +373,11 @@ http.createServer(app).listen(app.get('port'), function(){
 Процесс
 </h3>
 
-Процесс миграции начинается с установки обязательных промежуточных обработчиков для приложения Express 4 и обновления Express и Jade до соответствующих последних версий с помощью следующей команды:
+Процесс миграции начинается с установки обязательных промежуточных обработчиков для приложения Express 4 и обновления Express и Pug до соответствующих последних версий с помощью следующей команды:
 
 <pre>
 <code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
 </code>
 </pre>
 
@@ -415,7 +415,7 @@ $ npm install serve-favicon morgan method-override express-session body-parser m
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^2.0.0-beta6",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
@@ -450,7 +450,7 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(methodOverride());

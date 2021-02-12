@@ -97,9 +97,9 @@ $ DEBUG=express:* node ./bin/www
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
 </code>
 </pre>
 
@@ -113,7 +113,7 @@ $ DEBUG=express:* node ./bin/www
 
 <pre>
 <code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code>
 </pre>
 

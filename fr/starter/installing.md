@@ -36,7 +36,7 @@ entry point: (index.js)
 
 Entrez `app.js` ou un nom de votre choix pour le fichier principal. Si vous souhaitez que le nom soit `index.js`, appuyez sur la touche RETURN pour accepter le nom de fichier par défaut suggéré.
 
-Installez ensuite Express dans le répertoire `app`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
+Installez ensuite Express dans le répertoire `myapp`, puis sauvegardez-le dans la liste des dépendances. Par exemple :
 
 <pre>
 <code class="language-sh" translate="no">
@@ -53,6 +53,7 @@ $ npm install express
 </pre>
 
 <div class="doc-box doc-info" markdown="1">
-Les modules de noeuds installés à l'aide de l'option `--save` sont ajoutés à la liste `dependencies` dans le fichier `package.json`.
-Par la suite, l'exécution de `npm install` dans le répertoire `app` installera automatiquement les modules dans la liste des dépendances.
+Les modules Node.js installés à l'aide de l'option `--save` sont ajoutés à la liste des dépendances `dependencies`, dans le fichier `package.json`.
+Par défaut, depuis la version 5.0, `npm install <package-name>` ajoute automatiquement le module Node.js à la liste des dépendances.
+Par la suite, l'exécution de `npm install` dans le répertoire de l'application installera automatiquement les modules présents dans la liste des dépendances.
 </div>

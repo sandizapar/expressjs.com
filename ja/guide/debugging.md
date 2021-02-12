@@ -15,24 +15,19 @@ Express は、[debug](https://www.npmjs.com/package/debug) モジュールを内
 
 Express で使用されているすべての内部ログを表示するには、アプリケーションの起動時に `DEBUG` 環境変数を `express:*` に設定します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Windows では、対応するコマンドを使用します。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 > set DEBUG=express:* & node index.js
-</code>
-</pre>
+```
 
 [express ジェネレーター](/{{ page.lang }}/starter/generator.html) で生成されるデフォルトのアプリケーションでこのコマンドを実行すると、以下の出力が表示されます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -74,13 +69,11 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +0ms
   express:router use / &lt;anonymous&gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 その後、アプリケーションに対して要求が出されると、Express コードで指定された次のログが表示されます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -93,11 +86,10 @@ $ DEBUG=express:* node ./bin/www
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
-</code>
-</pre>
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
 
 ルーター実装からのログのみを表示するには、`DEBUG` の値を `express:router` に設定します。同様に、アプリケーション実装からのログのみを表示するには、`DEBUG` を `express:application` に設定します。その他についても同様に設定します。
 
@@ -107,18 +99,14 @@ $ DEBUG=express:* node ./bin/www
 
 例えば、`$ express sample-app` を使用してアプリケーションを生成する場合、次のコマンドを使用してデバッグ・ステートメントを有効にすることができます。
 
-<pre>
-<code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
-</code>
-</pre>
+```sh
+$ DEBUG=sample-app:* node ./bin/www
+```
 
 名前のコンマ区切りリストを割り当てることで、複数のデバッグ名前空間を指定できます。
 
-<pre>
-<code class="language-sh" translate="no">
+```sh
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
 `debug` の詳細については、[debug](https://www.npmjs.com/package/debug) を参照してください。

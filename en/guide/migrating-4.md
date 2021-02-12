@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-4.html"
 ---
-<div id="page-doc" markdown="1">
 # Moving to Express 4
 
 <h2 id="overview">Overview</h2>
@@ -33,8 +32,8 @@ There are several significant changes in Express 4:
 
 See also:
 
-* [New features in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrating from 3.x to 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+* [New features in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+* [Migrating from 3.x to 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Changes to Express core and middleware system
@@ -460,9 +459,11 @@ app.set('view engine', 'pug')
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
 app.use(logger('dev'))
 app.use(methodOverride())
-app.use(session({ resave: true,
-                  saveUninitialized: true,
-                  secret: 'uwotm8' }))
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'uwotm8'
+}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(multer())
@@ -604,4 +605,3 @@ You have now moved the functionality of `./bin/www` back to
 `app.js`.  This change is not recommended, but the exercise helps you
 to understand how the `./bin/www` file works, and why the `app.js` file
 no longer starts on its own.
-</div>

@@ -5,12 +5,21 @@ menu: starter
 lang: en
 redirect_from: "/starter/static-files.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Serving static files in Express
 
 To serve static files such as images, CSS files, and JavaScript files, use the `express.static` built-in middleware function in Express.
 
-Pass the name of the directory that contains the static assets to the `express.static` middleware function to start serving the files directly. For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
+The function signature is:
+
+```js
+express.static(root, [options])
+```
+
+The `root` argument specifies the root directory from which to serve static assets.
+For more information on the `options` argument, see [express.static](/{{page.lang}}/4x/api.html#express.static).
+
+For example, use the following code to serve images, CSS files, and JavaScript files in a directory named `public`:
 
 ```js
 app.use(express.static('public'))
@@ -39,6 +48,9 @@ app.use(express.static('files'))
 
 Express looks up the files in the order in which you set the static directories with the `express.static` middleware function.
 
+<div class="doc-box doc-info" markdown="1">NOTE: For best results, [use a reverse proxy](/{{page.lang}}/advanced/best-practice-performance.html#use-a-reverse-proxy) cache to improve performance of serving static assets.
+</div>
+
 To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the `express.static` function, [specify a mount path](/{{ page.lang }}/4x/api.html#app.use) for the static directory, as shown below:
 
 ```js
@@ -60,4 +72,7 @@ However, the path that you provide to the `express.static` function is relative 
 ```js
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
-</div>
+
+For more details about the `serve-static` function and its options, see  [serve-static](/resources/middleware/serve-static.html).
+
+### [Previous: Basic Routing ](/{{ page.lang }}/starter/basic-routing.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: More examples ](/{{ page.lang }}/starter/examples.html)

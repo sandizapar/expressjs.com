@@ -1,8 +1,8 @@
 <ul>
   <li>
-    <p class="announcement-title">Express 4.15.3 is the current release.</p>
+    <p class="announcement-title">Express 5.0 alpha documentation is now available.</p>
     <p markdown="1">
-     For more information on what was added in this release, see the [4.15.3 changelog](/{{ page.lang }}/changelog/4x.html#4.15.3).
+     The alpha <a href="{{ page.lang }}/5x/api.html">API documentation</a> is a work in progress.  For information on what's in the release, see the Express <a href="https://github.com/expressjs/express/blob/5.0/History.md">release history</a>.
     </p>
   </li>
 </ul>

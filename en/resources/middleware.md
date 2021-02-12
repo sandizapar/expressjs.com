@@ -4,8 +4,9 @@ title: Express middleware
 menu: resources
 lang: en
 redirect_from: "/resources/middleware.html"
+module: mw-home
 ---
-<div id="page-doc" markdown="1">
+
 ## Express middleware
 
 The Express middleware modules listed here are maintained by the
@@ -13,44 +14,34 @@ The Express middleware modules listed here are maintained by the
 
 |Middleware module | Description | Replaces built-in function (Express 3)|
 |---------------------------|---------------------|----------------------|
-| [body-parser](/{{page.lang}}/resources/middleware/body-parser.html) | Parse HTTP request body. See also: [body](https://github.com/raynos/body), [co-body](https://github.com/visionmedia/co-body), and  [raw-body](https://github.com/stream-utils/raw-body). | express.bodyParser |
-| [compression](/{{page.lang}}/resources/middleware/compression.html) | Compress HTTP responses. | express.compress |
-| [connect-rid](/{{page.lang}}/resources/middleware/connect-rid.html) | Generate unique request ID. | NA |
-| [cookie-parser](/{{page.lang}}/resources/middleware/cookie-parser.html) | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip). | express.cookieParser|
-| [cookie-session](/{{page.lang}}/resources/middleware/cookie-session.html) | Establish cookie-based sessions.| express.cookieSession |
-| [cors](/{{page.lang}}/resources/middleware/cors.html) | Enable cross-origin resource sharing (CORS) with various options.| NA
-| [csurf](/{{page.lang}}/resources/middleware/csurf.html) | Protect from CSRF exploits.|express.csrf |
-| [errorhandler](/{{page.lang}}/resources/middleware/errorhandler.html) |Development error-handling/debugging. |express.errorHandler |
-| [method-override](/{{page.lang}}/resources/middleware/method-override.html) |Override HTTP methods using header. |express.methodOverride |
-| [morgan](/{{page.lang}}/resources/middleware/morgan.html) | HTTP request logger. | express.logger |
-| [multer](/{{page.lang}}/resources/middleware/multer.html) | Handle multi-part form data. | express.bodyParser |
-| [response-time](/{{page.lang}}/resources/middleware/response-time.html) |  Record HTTP response time. |express.responseTime |
-| [serve-favicon](/{{page.lang}}/resources/middleware/serve-favicon.html) | Serve a favicon. |express.favicon |
-| [serve-index](/{{page.lang}}/resources/middleware/serve-index.html) | Serve directory listing for a given path.| express.directory |
-| [serve-static](/{{page.lang}}/resources/middleware/serve-static.html) |Serve static files. |express.static |
-| [session](/{{page.lang}}/resources/middleware/session.html) | Establish server-based sessions (development only). | express.session |
-| [timeout](/{{page.lang}}/resources/middleware/timeout.html) | Set a timeout period for HTTP request processing.|express.timeout |
-| [vhost](/{{page.lang}}/resources/middleware/vhost.html) |Create virtual domains.|express.vhost|
-
-<!--
-- express.limit
-  - [raw-body](https://github.com/stream-utils/raw-body)
-- express.multipart
-  - [connect-busboy](https://github.com/mscdex/connect-busboy)
-  - [connect-multiparty](https://github.com/superjoe30/connect-multiparty)
-- express.query
-  - [qs](https://github.com/visionmedia/node-querystring)
-- express.staticCache
-  - [st](https://github.com/isaacs/st)
-  - [connect-static](https://github.com/andrewrk/connect-static)
--->
+| [body-parser](/resources/middleware/body-parser.html) | Parse HTTP request body. See also: [body](https://github.com/raynos/body), [co-body](https://github.com/visionmedia/co-body), and  [raw-body](https://github.com/stream-utils/raw-body). | express.bodyParser |
+| [compression](/resources/middleware/compression.html) | Compress HTTP responses. | express.compress |
+| [connect-rid](/resources/middleware/connect-rid.html) | Generate unique request ID. | NA |
+| [cookie-parser](/resources/middleware/cookie-parser.html) | Parse cookie header and populate `req.cookies`. See also [cookies](https://github.com/jed/cookies) and [keygrip](https://github.com/jed/keygrip). | express.cookieParser|
+| [cookie-session](/resources/middleware/cookie-session.html) | Establish cookie-based sessions.| express.cookieSession |
+| [cors](/resources/middleware/cors.html) | Enable cross-origin resource sharing (CORS) with various options.| NA
+| [csurf](/resources/middleware/csurf.html) | Protect from CSRF exploits.|express.csrf |
+| [errorhandler](/resources/middleware/errorhandler.html) |Development error-handling/debugging. |express.errorHandler |
+| [method-override](/resources/middleware/method-override.html) |Override HTTP methods using header. |express.methodOverride |
+| [morgan](/resources/middleware/morgan.html) | HTTP request logger. | express.logger |
+| [multer](/resources/middleware/multer.html) | Handle multi-part form data. | express.bodyParser |
+| [response-time](/resources/middleware/response-time.html) |  Record HTTP response time. |express.responseTime |
+| [serve-favicon](/resources/middleware/serve-favicon.html) | Serve a favicon. |express.favicon |
+| [serve-index](/resources/middleware/serve-index.html) | Serve directory listing for a given path.| express.directory |
+| [serve-static](/resources/middleware/serve-static.html) |Serve static files. |express.static |
+| [session](/resources/middleware/session.html) | Establish server-based sessions (development only). | express.session |
+| [timeout](/resources/middleware/timeout.html) | Set a timeout period for HTTP request processing.|express.timeout |
+| [vhost](/resources/middleware/vhost.html) |Create virtual domains.|express.vhost|
 
 ## Additional middleware modules
 
 These are some additional popular middleware modules.
 
+{% include community-caveat.html %}
+
 |Middleware&nbsp;module | Description |
 |---------------------------|---------------------|
+| [cls-rtracer](https://github.com/puzpuzpuz/cls-rtracer) | Middleware for CLS-based request id generation. An out-of-the-box solution for adding request ids into your logs.|
 | [connect-image-optimus](https://github.com/msemenistyi/connect-image-optimus) | Optimize image serving. Switches images to `.webp` or `.jxr`, if possible.|
 | [express-debug](https://github.com/devoidfury/express-debug) | Development tool that adds information about template variables (locals), current session, and so on.|
 | [express-partial-response](https://github.com/nemtsov/express-partial-response) | Filters out parts of JSON responses based on the `fields` query-string; by using Google API's Partial Response.|
@@ -65,5 +56,4 @@ These are some additional popular middleware modules.
 | [view-helpers](https://github.com/madhums/node-view-helpers) | Common helper methods for views.|
 | [sriracha-admin](https://github.com/hdngr/siracha) | Dynamically generate an admin site for Mongoose. |
 
-For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework/wiki/Modules).
-</div>
+For more middleware modules, see [http-framework](https://github.com/Raynos/http-framework#modules).

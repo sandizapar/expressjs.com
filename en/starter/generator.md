@@ -5,15 +5,22 @@ menu: starter
 lang: en
 redirect_from: "/starter/generator.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Express application generator
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
 ```sh
-$ npm install express-generator -g
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it.
+
+```sh
+$ npm install -g express-generator
+$ express
 ```
 
 Display the command options with the `-h` option:
@@ -31,6 +38,7 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
     -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
     -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
@@ -74,11 +82,18 @@ On MacOS or Linux, run the app with this command:
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows, use this command:
+On Windows Command Prompt, use this command:
 
 ```sh
 > set DEBUG=myapp:* & npm start
 ```
+
+On Windows PowerShell, use this command:
+
+```sh
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
 
 Then load `http://localhost:3000/` in your browser to access the app.
 
@@ -109,4 +124,5 @@ The generated app has the following directory structure:
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>
-</div>
+
+###  [Previous: Hello World ](/{{ page.lang }}/starter/hello-world.html)&nbsp;&nbsp;&nbsp;&nbsp;[Next: Basic routing](/{{ page.lang }}/starter/basic-routing.html)

@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/using-middleware.html"
 ---
-<div id="page-doc" markdown="1">
 # Using middleware
 
 Express is a routing and middleware web framework that has minimal functionality of its own: An Express application is essentially a series of middleware function calls.
@@ -39,6 +38,7 @@ Bind application-level middleware to an instance of the [app object](/{{ page.la
 This example shows a middleware function with no mount path. The function is executed every time the app receives a request.
 
 ```js
+var express = require('express')
 var app = express()
 
 app.use(function (req, res, next) {
@@ -108,13 +108,34 @@ app.get('/user/:id', function (req, res, next) {
   // otherwise pass the control to the next middleware function in this stack
   else next()
 }, function (req, res, next) {
-  // render a regular page
-  res.render('regular')
+  // send a regular response
+  res.send('regular')
 })
 
-// handler for the /user/:id path, which renders a special page
+// handler for the /user/:id path, which sends a special response
 app.get('/user/:id', function (req, res, next) {
-  res.render('special')
+  res.send('special')
+})
+```
+
+Middleware can also be declared in an array for reusability.
+
+This example shows an array with a middleware sub-stack that handles GET requests to the `/user/:id` path
+
+```js
+function logOriginalUrl (req, res, next) {
+  console.log('Request URL:', req.originalUrl)
+  next()
+}
+
+function logMethod (req, res, next) {
+  console.log('Request Type:', req.method)
+  next()
+}
+
+var logStuff = [logOriginalUrl, logMethod]
+app.get('/user/:id', logStuff, function (req, res, next) {
+  res.send('User Info')
 })
 ```
 
@@ -130,6 +151,7 @@ Load router-level middleware by using the `router.use()` and `router.METHOD()` f
 The following example code replicates the middleware system that is shown above for application-level middleware, by using router-level middleware:
 
 ```js
+var express = require('express')
 var app = express()
 var router = express.Router()
 
@@ -175,6 +197,7 @@ to pass control back out of the router instance.
 This example shows a middleware sub-stack that handles GET requests to the `/user/:id` path.
 
 ```js
+var express = require('express')
 var app = express()
 var router = express.Router()
 
@@ -184,7 +207,7 @@ router.use(function (req, res, next) {
   next()
 })
 
-router.get('/', function (req, res) {
+router.get('/user/:id', function (req, res) {
   res.send('hello, user!')
 })
 
@@ -213,48 +236,14 @@ For details about error-handling middleware, see: [Error handling](/{{ page.lang
 
 <h2 id='middleware.built-in'>Built-in middleware</h2>
 
-Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). With the exception of `express.static`, all of the middleware
-functions that were previously included with Express' are now in separate modules. Please view [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
+Starting with version 4.x, Express no longer depends on [Connect](https://github.com/senchalabs/connect). The middleware
+functions that were previously included with Express are now in separate modules; see [the list of middleware functions](https://github.com/senchalabs/connect#middleware).
 
-The only built-in middleware function in Express is `express.static`. This function is based on [serve-static](https://github.com/expressjs/serve-static), and is responsible for serving static assets such as HTML files, images, and so on.
+Express has the following built-in middleware functions:
 
-The function signature is:
-
-```js
-express.static(root, [options])
-```
-
-The `root` argument specifies the root directory from which to serve static assets.
-
-For information on the `options` argument and more details on this middleware function, see [express.static](/en/4x/api.html#express.static).
-
-Here is an example of using the `express.static` middleware function with an elaborate options object:
-
-```js
-var options = {
-  dotfiles: 'ignore',
-  etag: false,
-  extensions: ['htm', 'html'],
-  index: false,
-  maxAge: '1d',
-  redirect: false,
-  setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
-
-app.use(express.static('public', options))
-```
-
-You can have more than one static directory per app:
-
-```js
-app.use(express.static('public'))
-app.use(express.static('uploads'))
-app.use(express.static('files'))
-```
-
-For more details about the `serve-static` function and its options, see: [serve-static](https://github.com/expressjs/serve-static) documentation.
+- [express.static](/en/4x/api.html#express.static) serves static assets such as HTML files, images, and so on.
+- [express.json](/en/4x/api.html#express.json) parses incoming requests with JSON payloads. **NOTE: Available with Express 4.16.0+**
+- [express.urlencoded](/en/4x/api.html#express.urlencoded) parses incoming requests with URL-encoded payloads.  **NOTE: Available with Express 4.16.0+**
 
 <h2 id='middleware.third-party'>Third-party middleware</h2>
 
@@ -278,4 +267,3 @@ app.use(cookieParser())
 ```
 
 For a partial list of third-party middleware functions that are commonly used with Express, see: [Third-party middleware](../resources/middleware.html).
-</div>

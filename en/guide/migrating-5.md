@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/migrating-5.html"
 ---
-<div id="page-doc" markdown="1">
 # Moving to Express 5
 
 <h2 id="overview">Overview</h2>
@@ -17,7 +16,7 @@ Express 5 is not very different from Express 4: The changes to the API are not a
 To install the latest alpha and to preview Express 5, enter the following command in your application root directory:
 
 ```sh
-$ npm install express@5.0.0-alpha.2 --save
+$ npm install express@>=5.0.0-alpha.8 --save
 ```
 
 You can then run your automated tests to see what fails, and fix problems according to the updates listed below. After addressing test failures, run your app to see what errors occur. You'll find out right away if the app uses any methods or properties that are not supported.
@@ -25,7 +24,7 @@ You can then run your automated tests to see what fails, and fix problems accord
 <h2 id="changes">Changes in Express 5</h2>
 
 Here is the list of changes (as of the alpha 2 release ) that will affect you as a user of Express.
-See the [pull request](https://github.com/strongloop/express/pull/2237) for a list of all the planned features.
+See the [pull request](https://github.com/expressjs/express/pull/2237) for a list of all the planned features.
 
 **Removed methods and properties**
 
@@ -130,4 +129,3 @@ In Express 4.7 and Express 5 onwards, the query parser option can accept `false`
 <h4 id="res.render">res.render()</h4>
 
 This method now enforces asynchronous behavior for all view engines, avoiding bugs caused by view engines that had a synchronous implementation and that violated the recommended interface.
-</div>

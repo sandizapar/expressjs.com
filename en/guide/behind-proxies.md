@@ -5,7 +5,6 @@ menu: guide
 lang: en
 redirect_from: "/guide/behind-proxies.html"
 ---
-<div id="page-doc" markdown="1">
 # Express behind proxies
 
 When running an Express app behind a proxy, set (by using [app.set()](/{{ page.lang }}/4x/api.html#app.set)) the application variable `trust proxy` to one of the values listed in the following table.
@@ -68,7 +67,7 @@ app.set('trust proxy', function (ip) {
   </tbody>
 </table>
 
-Setting a non-`false` `trust proxy` value results in three important changes:
+Enabling `trust proxy` will have the following impact:
 
 <ul>
   <li markdown="1">The value of [req.hostname](/{{ page.lang }}/api.html#req.hostname) is derived from the value set in the `X-Forwarded-Host` header, which can be set by the client or by the proxy.
@@ -80,4 +79,3 @@ Setting a non-`false` `trust proxy` value results in three important changes:
 </ul>
 
 The `trust proxy` setting is implemented using the [proxy-addr](https://www.npmjs.com/package/proxy-addr) package. For more information, see its documentation.
-</div>

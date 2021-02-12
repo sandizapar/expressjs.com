@@ -90,9 +90,9 @@ Now, when a request is made to the app, you will see the logs specified in the E
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
 </code></pre>
 
 To see the logs only from the router implementation set the value of `DEBUG` to `express:router`. Likewise, to see logs only from the application implementation set the value of `DEBUG` to `express:application`, and so on.
@@ -110,7 +110,7 @@ $ express sample-app
 You can enable the debug statements with the following command
 
 <pre><code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
+$ DEBUG=sample-app:* node ./bin/www
 </code></pre>
 
 You can specify more than one debug namespace by assignning a comma separated list of names, as shown below.

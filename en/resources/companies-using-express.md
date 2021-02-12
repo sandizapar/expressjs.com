@@ -5,7 +5,7 @@ menu: resources
 lang: en
 redirect_from: "/resources/companies-using-express.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Companies using Express in production
 
 <div style="text-align:center;">
@@ -23,6 +23,9 @@ redirect_from: "/resources/companies-using-express.html"
     </a>
     <a target="_new" class="imagelink" href="http://ibm.com">
       <img alt="IBM" class="memberlogo" src="/images/companies/ibm-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://www.icicletech.com">
+      <img alt="Icicle Technologies" class="memberlogo" src="/images/companies/icicle-logo.png" />
     </a>
     <a target="_new" class="imagelink" href="http://mulesoft.com">
       <img alt="Mulesoft" class="memberlogo" src="/images/companies/mulesoft-logo.png" />
@@ -53,9 +56,23 @@ redirect_from: "/resources/companies-using-express.html"
     </a>
     <a target="_new" class="imagelink" href="http://www.agrippa.no/en">
       <img alt="Agrippa Solutions AS" class="memberlogo" src="/images/companies/OrgASLogo.png" />
-    </a>    
-</div>
-<p style="margin-top: 30px;">
-To add your logo to this page, please <a href="https://github.com/expressjs/expressjs.com/blob/gh-pages/en/resources/companies-using-express.md">open a pull request</a>.
-</p>
+    </a>
+    <a target="_new" class="imagelink" href="https://www.circlehd.com">
+      <img alt="CircleHD" class="memberlogo" src="/images/companies/circlehd-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://www.teachoo.com">
+      <img alt="CircleHD" class="memberlogo" src="/images/companies/teachoo-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://www.taskade.com">
+      <img alt="Taskade" class="memberlogo" src="/images/companies/taskade-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://hasura.io">
+      <img alt="Hasura" class="memberlogo" src="/images/companies/hasura-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://ilovecoding.org">
+      <img alt="iLoveCoding" class="memberlogo" src="/images/companies/ilovecoding-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://www.kuali.co">
+      <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
+    </a>
 </div>

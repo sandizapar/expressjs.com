@@ -51,7 +51,10 @@ lang: sk
     <a target="_new" class="imagelink" href="https://www.yandex.ru/">
       <img alt="Yandex" class="memberlogo" src="/images/companies/yandex-logo.png" />
     </a>
+    <a target="_new" class="imagelink" href="https://ilovecoding.org">
+      <img alt="iLoveCoding" class="memberlogo" src="/images/companies/ilovecoding-logo.png" />
+    </a>
+    <a target="_new" class="imagelink" href="https://www.kuali.co">
+      <img alt="kuali" class="memberlogo" src="/images/companies/kuali-logo.png" />
+    </a>
 </div>
-
-Ak vaša firma používa Express, dajte nám vedieť:
-[callback@us.ibm.com](mailto:callback@us.ibm.com).

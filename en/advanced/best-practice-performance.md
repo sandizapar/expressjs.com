@@ -5,7 +5,7 @@ menu: advanced
 lang: en
 redirect_from: "/advanced/best-practice-performance.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Production best practices: performance and reliability
 
 ## Overview
@@ -14,17 +14,27 @@ This article discusses performance and reliability best practices for Express ap
 
 This topic clearly falls into the "devops" world, spanning both traditional development and operations. Accordingly, the information is divided into two parts:
 
-* [Things to do in your code](#in-code) (the dev part).
-* [Things to do in your environment / setup](#in-environment) (the ops part).
+* Things to do in your code (the dev part):
+  * [Use gzip compression](#use-gzip-compression)
+  * [Don't use synchronous functions](#dont-use-synchronous-functions)
+  * [Do logging correctly](#do-logging-correctly)
+  * [Handle exceptions properly](#handle-exceptions-properly)
+* Things to do in your environment / setup (the ops part):
+  * [Set NODE_ENV to "production"](#set-node_env-to-production)
+  * [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+  * [Run your app in a cluster](#run-your-app-in-a-cluster)
+  * [Cache request results](#cache-request-results)
+  * [Use a load balancer](#use-a-load-balancer)
+  * [Use a reverse proxy](#use-a-reverse-proxy)
 
 ## Things to do in your code {#in-code}
 
 Here are some things you can do in your code to improve your application's performance:
 
-* Use gzip compression
-* Don't use synchronous functions
-* Do logging correctly
-* Handle exceptions properly
+* [Use gzip compression](#use-gzip-compression)
+* [Don't use synchronous functions](#dont-use-synchronous-functions)
+* [Do logging correctly](#do-logging-correctly)
+* [Handle exceptions properly](#handle-exceptions-properly)
 
 ### Use gzip compression
 
@@ -37,7 +47,7 @@ var app = express()
 app.use(compression())
 ```
 
-For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
+For a high-traffic website in production, the best way to put compression in place is to implement it at a reverse proxy level (see [Use a reverse proxy](#use-a-reverse-proxy)). In that case, you do not need to use compression middleware. For details on enabling gzip compression in Nginx, see [Module ngx_http_gzip_module](http://nginx.org/en/docs/http/ngx_http_gzip_module.html) in the Nginx documentation.
 
 ### Don't use synchronous functions
 
@@ -53,7 +63,7 @@ In general, there are two reasons for logging from your app: For debugging and f
 
 #### For debugging
 
-If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.err()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.err()` to another program. But then, you're not really going to debug in production, are you?
+If you're logging for purposes of debugging, then instead of using `console.log()`, use a special debugging module like [debug](https://www.npmjs.com/package/debug). This module enables you to use the DEBUG environment variable to control what debug messages are sent to `console.error()`, if any. To keep your app purely asynchronous, you'd still want to pipe `console.error()` to another program. But then, you're not really going to debug in production, are you?
 
 #### For app activity
 
@@ -61,7 +71,7 @@ If you're logging app activity (for example, tracking traffic or API calls), ins
 
 ### Handle exceptions properly
 
-Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-restart) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
+Node apps crash when they encounter an uncaught exception. Not handling exceptions and taking appropriate actions will make your Express app crash and go offline. If you follow the advice in [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts) below, then your app will recover from a crash. Fortunately, Express apps typically have a short startup time. Nevertheless, you want to avoid crashing in the first place, and to do that, you need to handle exceptions properly.
 
 To ensure you handle all exceptions, use the following techniques:
 
@@ -140,28 +150,31 @@ However, there are two caveats:
 2.  Event emitters (like streams) can still cause uncaught exceptions. So make sure you are handling the error event properly; for example:
 
 ```js
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 app.get('/', wrap(async (req, res, next) => {
-  let company = await getCompanyById(req.query.id)
-  let stream = getLogoStreamById(company.id)
+  const company = await getCompanyById(req.query.id)
+  const stream = getLogoStreamById(company.id)
   stream.on('error', next).pipe(res)
 }))
 ```
 
-For more information about error-handling by using promises, see:
+The `wrap()` function is a wrapper that catches rejected promises and calls `next()` with the error as the first argument.
+For details, see [Asynchronous
+Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/#cleaner-code-with-generators).
 
-* [Asynchronous Error Handling in Express with Promises, Generators and ES7](https://strongloop.com/strongblog/async-error-handling-expressjs-es7-promises-generators/)
-* [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/)
+For more information about error-handling by using promises, see [Promises in Node.js with Q – An Alternative to Callbacks](https://strongloop.com/strongblog/promises-in-node-js-with-q-an-alternative-to-callbacks/).
 
 ## Things to do in your environment / setup {#in-environment}
 
 Here are some things you can do in your system environment to improve your app's performance:
 
-* Set NODE_ENV to "production"
-* Ensure your app automatically restarts
-* Run your app in a cluster
-* Cache request results
-* Use a load balancer
-* Use a reverse proxy
+* [Set NODE_ENV to "production"](#set-node_env-to-production)
+* [Ensure your app automatically restarts](#ensure-your-app-automatically-restarts)
+* [Run your app in a cluster](#run-your-app-in-a-cluster)
+* [Cache request results](#cache-request-results)
+* [Use a load balancer](#use-a-load-balancer)
+* [Use a reverse proxy](#use-a-reverse-proxy)
 
 ### Set NODE_ENV to "production"
 
@@ -197,9 +210,7 @@ Environment=NODE_ENV=production
 
 For more information, see [Using Environment Variables In systemd Units](https://coreos.com/os/docs/latest/using-environment-variables-in-systemd-units.html).
 
-If you are using StrongLoop Process Manager, you can also [set the environment variable when you install StrongLoop PM as a service](https://docs.strongloop.com/display/SLC/Setting+up+a+production+host#Settingupaproductionhost-Setenvironmentvariables).
-
-### Ensure your app automatically restarts {#ensure-restart}
+### Ensure your app automatically restarts
 
 In production, you don't want your application to be offline, ever. This means you need to make sure it restarts both if the app crashes and if the server itself crashes. Although you hope that neither of those events occurs, realistically you must account for both eventualities by:
 
@@ -252,16 +263,16 @@ There are two ways to use init systems with your Express app:
 
 Systemd is a Linux system and service manager. Most major Linux distributions have adopted systemd as their default init system.
 
-A systemd service configuration file is called a _unit file_, with a filename ending in .service. Here's an example unit file to manage a Node app directly (replace the bold text with values for your system and app):
+A systemd service configuration file is called a _unit file_, with a filename ending in `.service`. Here's an example unit file to manage a Node app directly.  Replace the values enclosed in `<angle brackets>` for your system and app:
 
 ```sh
 [Unit]
-Description=Awesome Express App
+Description=<Awesome Express App>
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/node /projects/myapp/index.js
-WorkingDirectory=/projects/myapp
+ExecStart=/usr/local/bin/node </projects/myapp/index.js>
+WorkingDirectory=</projects/myapp>
 
 User=nobody
 Group=nogroup
@@ -399,6 +410,34 @@ $ slc ctl -C http://prod.foo.com:8701 set-size my-app 8
 
 For more information on clustering with StrongLoop PM, see [Clustering](https://docs.strongloop.com/display/SLC/Clustering) in StrongLoop documentation.
 
+#### Using PM2
+
+If you deploy your application with PM2, then you can take advantage of clustering _without_ modifying your application code.  You should ensure your [application is stateless](http://pm2.keymetrics.io/docs/usage/specifics/#stateless-apps) first, meaning no local data is stored in the process (such as sessions, websocket connections and the like).
+
+When running an application with PM2, you can enable **cluster mode** to run it in a cluster with a number of instances of your choosing, such as the matching the number of available CPUs on the machine. You can manually change the number of processes in the cluster using the `pm2` command line tool without stopping the app.
+
+To enable cluster mode, start your application like so:
+
+```sh
+# Start 4 worker processes
+$ pm2 start app.js -i 4
+# Auto-detect number of available CPUs and start that many worker processes
+$ pm2 start app.js -i max
+```
+
+This can also be configured within a PM2 process file (`ecosystem.config.js` or similar) by setting `exec_mode` to `cluster` and `instances` to the number of workers to start.
+
+Once running, a given application with the name `app` can be scaled like so:
+
+```sh
+# Add 3 more workers
+$ pm2 scale app +3
+# Scale to a specific number of workers
+$ pm2 scale app 2
+```
+
+For more information on clustering with PM2, see [Cluster Mode](https://pm2.keymetrics.io/docs/usage/cluster-mode/) in the PM2 documentation.
+
 ### Cache request results
 
 Another strategy to improve the performance in production is to cache the result of requests, so that your app does not repeat the operation to serve the same request repeatedly.
@@ -413,14 +452,8 @@ A load balancer is usually a reverse proxy that orchestrates traffic to and from
 
 With load balancing, you might have to ensure that requests that are associated with a particular session ID connect to the process that originated them. This is known as _session affinity_, or _sticky sessions_, and may be addressed by the suggestion above to use a data store such as Redis for session data (depending on your application). For a discussion, see [Using multiple nodes](http://socket.io/docs/using-multiple-nodes/).
 
-#### Using StrongLoop PM with an Nginx load balancer
-
-[StrongLoop Process Manager](http://strong-pm.io/) integrates with an Nginx Controller, making it easy to configure multi-host production environment configurations. For more information, see [Scaling to multiple servers](https://docs.strongloop.com/display/SLC/Scaling+to+multiple+servers) (StrongLoop documentation).
-<a name="proxy"></a>
-
 ### Use a reverse proxy
 
 A reverse proxy sits in front of a web app and performs supporting operations on the requests, apart from directing requests to the app. It can handle error pages, compression, caching, serving files, and load balancing among other things.
 
 Handing over tasks that do not require knowledge of application state to a reverse proxy frees up Express to perform specialized application tasks. For this reason, it is recommended to run Express behind a reverse proxy like [Nginx](https://www.nginx.com/) or [HAProxy](http://www.haproxy.org/) in production.
-</div>

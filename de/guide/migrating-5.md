@@ -25,7 +25,7 @@ Sie können Ihre automatisierten Tests ausführen, um zu sehen, was fehlschlägt
 
 <h2 id="changes">Änderungen in Express 5</h2>
 
-Nachfolgend finden Sie eine Liste mit Änderungen (Stand: Alpha-2-Release), die sich auf Sie als Express-Benutzer auswirken werden. Siehe hierzu auch die [Pull-Anforderung](https://github.com/strongloop/express/pull/2237) mit einer Liste aller geplanten Features und Funktionen.
+Nachfolgend finden Sie eine Liste mit Änderungen (Stand: Alpha-2-Release), die sich auf Sie als Express-Benutzer auswirken werden. Siehe hierzu auch die [Pull-Anforderung](https://github.com/expressjs/express/pull/2237) mit einer Liste aller geplanten Features und Funktionen.
 
 **Entfernte Methoden und Eigenschaften**
 
@@ -122,7 +122,7 @@ In Express 4 übergab die Funktion `req.host` nicht ordnungsgemäß eine eventue
 
 <h4 id="req.query">req.query</h4>
 
-In Express 4.7 und ab Express 5 kann die Abfrageparser-Option `false` akzeptieren, um das Parsing von Abfragezeichenfolgen zu inaktivieren, wenn Sie Ihre eigene Funktion für die Parsinglogik bei Abfragezeichenfolgen verwenden wollen.
+In Express 4.7 und ab Express 5 kann die Abfrageparser-Option `false` akzeptieren, um das Parsing von Abfragezeichenfolgen zu deaktivieren, wenn Sie Ihre eigene Funktion für die Parsinglogik bei Abfragezeichenfolgen verwenden wollen.
 
 <h3>Verbesserungen</h3>
 
