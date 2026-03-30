@@ -1,29 +1,35 @@
 ---
 layout: page
 title: Express-Anwendungsgenerator
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
-lang: de
+order: 3
+redirect_from: "  "
 ---
 
 # Express-Anwendungsgenerator
 
 Mit dem Application Generator Tool `express` können Sie innerhalb kürzester Zeit ein Anwendungsgerüst erstellen.
 
-Installieren Sie `express` mit dem folgenden Befehl:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install express-generator -g
-</code>
-</pre>
+```bash
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
+```
 
 Zeigen Sie die Befehlsoptionen mit der Option `-h` an:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express -h
 
-  Usage: express [options][dir]
+  Usage: express [options] [dir]
 
   Options:
 
@@ -33,17 +39,16 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
-    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
-Im folgenden Beispiel wird eine Express-Anwendung mit dem Namen _myapp_ im aktuellen Arbeitsverzeichnis erstellt:
+Im folgenden Beispiel wird eine Express-Anwendung mit dem Namen _myapp_ im aktuellen Arbeitsverzeichnis erstellt: The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -63,40 +68,38 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Installieren Sie dann Abhängigkeiten:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ cd myapp
 $ npm install
-</code>
-</pre>
-
-Führen Sie unter MacOS oder Linux die Anwendung mit diesem Befehl aus:
-
-<pre>
-<code class="language-sh" translate="no">
-$ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 Verwenden Sie unter Windows diesen Befehl:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
+$ DEBUG=myapp:* npm start
+```
+
+Führen Sie unter MacOS oder Linux die Anwendung mit diesem Befehl aus:
+
+```bash
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
+
+On Windows PowerShell, use this command:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
 
 Laden Sie dann `http://localhost:3000/` in Ihren Browser, um auf die Anwendung zuzugreifen.
 
 Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 .
 ├── app.js
 ├── bin
@@ -116,8 +119,7 @@ Die erstellte Anwendung hat die folgende Verzeichnisstruktur:
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
 Die vom Generator erstellte Anwendungsstruktur ist nur eine der vielen Möglichkeiten, Express-Anwendungen zu strukturieren. Sie können diese Struktur verwenden oder sie an Ihre Anforderungen anpassen.

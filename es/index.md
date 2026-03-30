@@ -1,52 +1,59 @@
 ---
 layout: home
-title: Express - Infraestructura de aplicaciones web Node.js
+title: Express - Node.js Marco de aplicación web
+description: "Express es un marco web rápido, sin opinión y minimalista para Node.js, que proporciona un robusto conjunto de características para aplicaciones web y móviles."
 menu: home
-lang: es
+redirect_from: "  "
 ---
+
 <section id="home-content">
-  {% include header/header-{{ page.lang }}.html %}
-  <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a></div>
-        <span class="description">Infraestructura web rápida, minimalista y flexible para <a href='http://nodejs.org'>Node.js</a></span>
+        <div class="express"><span>Express</span><a href="https://github.com/expressjs/express/releases" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <h1 class="description">Marco web rápido, sin opinión y minimalista para <a href='https://nodejs.org/en/'>Node.js</a></h1>
     </section>
-    <div id="install-command">$ npm install express --save</div>
+    <pre class="install-command"><code>$ npm install express --save</code></pre>
   </div>
-  <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+
+  <div id="homepage-rightpane" class="pane" markdown="1">
+
+```javascript
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
   </div>
 </section>
 
-<!--<section id="doc-langs" markdown="1">
-  Documentos de Express disponibles en otros idiomas: [español](/es), [japonés](/ja), [ruso](/ru), [chino](/zh), [coreano](/ko), [portugués](/pt-br).
-</section>-->
+{% if site.announcement %}
+
+<section id="announcements">
+  {% include announcement.html %}
+</section>{% endif %}
 
 <section id="intro">
-
   <div id="boxes" class="clearfix">
-      <div id="web-applications">
-          <h3>Aplicaciones web</h3> Express es una infraestructura de aplicaciones web Node.js mínima y flexible que proporciona un conjunto sólido de características para las aplicaciones web y móviles.
-      </div>
-
-      <div id="apis">
-          <h3>API</h3> Con miles de métodos de programa de utilidad HTTP y middleware a su disposición, la creación de una API sólida es rápida y sencilla.
-      </div>
-
-      <div id="performance">
-          <h3>Rendimiento</h3> Express proporciona una delgada capa de características de aplicación web básicas, que no ocultan las características de Node.js que tanto ama y conoce.
-      </div>
-
-      <div id="sponsorship">
-          <a href="http://loopback.io/"><h3>LoopBack</h3> Desarrolle aplicaciones basadas en modelos con una infraestructura basada en Express.<br/>Encontrará más información en loopback.io.</a>
-      </div>
+    <div id="web-applications">
+      <h2>Aplicaciones web</h2> Express es un minimalista y flexible framework de aplicaciones web de Node.js que provee un conjunto robusto de características para aplicaciones web y móviles</div>
+    <div id="apis">
+      <h2>APIs</h2> Con una gran cantidad de métodos de utilidad HTTP y middleware a tu disposición, crear una API robusta es rápido y fácil.
+    </div>
+    <div id="performance">
+      <h2>Rendimiento</h2> Express proporciona una capa delgada de características fundamentales de la aplicación web, sin ocultar las características de Node.js que usted conoce y ama.
+    </div>
+    <div id="middleware">
+      <h2>Middleware</h2> 
+      Express es un marco de enrutamiento ligero y flexible con las características básicas mínimas 
+      destinado a aumentarse mediante el uso de  módulos <a href="{{ page.lang }}/resources/middleware.html">middleware</a>.
+    </div>
   </div>
-
 </section>
-
-<!--
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
-</section>
--->

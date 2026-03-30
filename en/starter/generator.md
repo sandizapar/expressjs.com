@@ -1,24 +1,32 @@
 ---
 layout: page
 title: Express application generator
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
-lang: en
+order: 3
 redirect_from: "/starter/generator.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Express application generator
 
 Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-The `express-generator` package installs the `express` command-line tool. Use the following command to do so:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
-```sh
-$ npm install express-generator -g
+```bash
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
 ```
 
 Display the command options with the `-h` option:
 
-```sh
+```bash
 $ express -h
 
   Usage: express [options] [dir]
@@ -31,6 +39,7 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
+        --no-view       generate without view engine
     -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
     -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
@@ -39,7 +48,7 @@ $ express -h
 
 For example, the following creates an Express app named _myapp_. The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-```sh
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -63,28 +72,35 @@ $ express --view=pug myapp
 
 Then install dependencies:
 
-```sh
+```bash
 $ cd myapp
 $ npm install
 ```
 
 On MacOS or Linux, run the app with this command:
 
-```sh
+```bash
 $ DEBUG=myapp:* npm start
 ```
 
-On Windows, use this command:
+On Windows Command Prompt, use this command:
 
-```sh
+```bash
 > set DEBUG=myapp:* & npm start
 ```
 
-Then load `http://localhost:3000/` in your browser to access the app.
+On Windows PowerShell, use this command:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
+
+
+Then, load `http://localhost:3000/` in your browser to access the app.
 
 The generated app has the following directory structure:
 
-```sh
+```bash
 .
 ├── app.js
 ├── bin
@@ -108,5 +124,4 @@ The generated app has the following directory structure:
 
 <div class="doc-box doc-info" markdown="1">
 The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
-</div>
 </div>

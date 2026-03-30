@@ -1,10 +1,6 @@
 <!DOCTYPE html>
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
 {% if page.lang %}
-<html lang="{{ page.lang }}">
+<html lang="{{ page.lang }}" prefix="og: http://ogp.me/ns#">
 
   {% include head.html %}
 
@@ -14,23 +10,31 @@
   <body class="non-en-doc">
   {% endif %}
 
-    <section class="page content">
+  {% include header.html %}
 
-      {% include header/header-{{ page.lang }}.html %}
+  <div id="overlay"></div>
 
-      <div id="overlay"></div>
-
-      {% if page.lang != 'en' %}
-        <div id="i18n-notice-box" class="doc-box doc-warn">
+  {% if page.lang != 'en' %}
+       <div id="i18n-notice-box" class="doc-notice" hidden>
           {% include i18n-notice.html %}
-        </div>
-      {% endif %}
+      </div>
+  {% endif %}
 
+  {% if page.layout == 'middleware' %}
+    <div class="content flex-row-content">
       {{ content }}
+    </div>
+  {% else %}
+    <div class="content">
+      <main>
+        {{ content }}
+        {% include bottom-navigation.html %}
+        {% include github-edit-btn.html %}
+      </main>
+    </div>
+  {% endif %}
 
-    </section>
-
-    {% include footer/footer-{{ page.lang }}.html %}
+  {% include footer.html %}
 
   </body>
 

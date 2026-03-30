@@ -8,17 +8,17 @@ by the parameters to the callback function in which you're working.
 For example:
 
 ```js
-app.get('/user/:id', function(req, res) {
-  res.send('user ' + req.params.id);
-});
+app.get('/user/:id', function (req, res) {
+  res.send('user ' + req.params.id)
+})
 ```
 
 But you could just as well have:
 
 ```js
-app.get('/user/:id', function(request, response) {
-  response.send('user ' + request.params.id);
-});
+app.get('/user/:id', function (request, response) {
+  response.send('user ' + request.params.id)
+})
 ```
 
 The `req` object is an enhanced version of Node's own request object
@@ -90,6 +90,10 @@ or [pez](https://www.npmjs.com/package/pez).
 
 <section markdown="1">
   {% include api/en/4x/req-query.md %}
+</section>
+
+<section markdown="1">
+  {% include api/en/4x/req-res.md %}
 </section>
 
 <section markdown="1">

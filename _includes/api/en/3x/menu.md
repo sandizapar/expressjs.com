@@ -1,3 +1,4 @@
+<button id="menu-toggle" title="show table of content">On this page</button>
 <ul id="menu">
     <li><a href="#express">express()</a></li>
     <li id="app-api"> <a href="#application">Application</a>
@@ -94,6 +95,8 @@
             </li>
             <li><a href="#req.acceptsLanguage">req.acceptsLanguage()</a>
             </li>
+            <li><a href="#req.res">req.res</a>
+            </li>
         </ul>
     </li>
     <li id="res-api"> <a href="#response">Response</a>
@@ -157,3 +160,4 @@
         </ul>
     </li>
 </ul>
+

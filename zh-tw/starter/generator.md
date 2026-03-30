@@ -1,29 +1,35 @@
 ---
 layout: page
 title: Express 應用程式產生器
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
-lang: zh-tw
+order: 3
+redirect_from: "  "
 ---
 
 # Express 應用程式產生器
 
-使用應用程式產生器工具 `express`，快速建立應用程式架構。
+Use the application generator tool, `express-generator`, to quickly create an application skeleton.
 
-使用下列指令來安裝 `express`：
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install express-generator -g
-</code>
-</pre>
+```bash
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
+```
 
 使用 `-h` 選項來顯示指令選項：
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express -h
 
-  Usage: express [options][dir]
+  Usage: express [options] [dir]
 
   Options:
 
@@ -33,17 +39,16 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
-    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
-舉例來說，以下是在現行工作目錄中建立一個名為 _myapp_ 的 Express 應用程式：
+舉例來說，以下是在現行工作目錄中建立一個名為 _myapp_ 的 Express 應用程式： The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -63,40 +68,38 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 然後安裝相依項目：
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 在 MacOS 或 Linux 中，使用下列指令來執行應用程式：
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 在 Windows 中，使用下列指令：
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
 
-然後在瀏覽器中載入 `http://localhost:3000/`，以存取應用程式。
+On Windows PowerShell, use this command:
 
-產生的應用程式具有如下的目錄結構：
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
 
-<pre>
-<code class="language-sh" translate="no">
+Then, load `http://localhost:3000/` in your browser to access the app.
+
+The generated app has the following directory structure:
+
+```bash
 .
 ├── app.js
 ├── bin
@@ -116,9 +119,8 @@ $ DEBUG=myapp:* npm start
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
-使用產生器來建立應用程式結構，只是多種用來建立 Express 應用程式結構的其中一種方式。您有權使用這種結構，或是加以修改盡量符合您的需求。
+The app structure created by the generator is just one of many ways to structure Express apps. Feel free to use this structure or modify it to best suit your needs.
 </div>

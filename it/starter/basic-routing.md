@@ -1,27 +1,28 @@
 ---
 layout: page
 title: Routing di base Express
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: it
+order: 4
+redirect_from: "  "
 ---
 
 # Routing di base
 
-Per *Routing* si intende determinare come un'applicazione risponde a una richiesta client a un endpoint particolare, il quale è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST e così via).
+Per _Routing_ si intende determinare come un'applicazione risponde a una richiesta client a un endpoint particolare, il quale è un URI (o percorso) e un metodo di richiesta HTTP specifico (GET, POST e così via).
 
 Ciascuna route può disporre di una o più funzioni dell'handler, le quali vengono eseguite quando si trova una corrispondenza per la route.
 
 La definizione della route ha la seguente struttura:
-<pre>
-<code class="language-javascript" translate="no">
+
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Dove:
 
 - `app` è un'istanza di `express`.
-- `METHOD` è un [metodo di richiesta HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` è un percorso sul server.
 - `HANDLER` è la funzione eseguita quando si trova una corrispondenza per la route.
 
@@ -33,42 +34,35 @@ I seguenti esempi mostrano come definire route semplici.
 
 Rispondere con `Hello World!` sulla homepage:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
-Rispondere alla richiesta POST sulla route principale (`/`), la home page dell'applicazione:
+Respond to a POST request on the root route (`/`), the application's home page:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 Rispondere a una richiesta PUT alla route `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 Rispondere a una richiesta DELETE alla route `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 Per ulteriori dettagli sul routing, consultare il [Manuale routing](/{{ page.lang }}/guide/routing.html).
+

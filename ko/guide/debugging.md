@@ -1,42 +1,30 @@
 ---
 layout: page
 title: Express 디버깅
+description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
-lang: ko
+order: 7
+redirect_from: "  "
 ---
 
 # Express 디버깅
 
-Express는 내부적으로 [debug](https://www.npmjs.com/package/debug) 모듈을
-사용하여 라우트 일치, 사용 중인 미들웨어 함수, 애플리케이션 모드, 그리고 요청-응답 주기의
-플로우에 대한 정보를 로그합니다.
-
-<div class="doc-box doc-info" markdown="1">
-`debug`는 `console.log`의 보강된 버전과도 같지만, `console.log`와는 달리
-프로덕션 코드에서 `debug` 로그를 주석 처리할 필요가 없습니다. 로깅은 기본적으로 꺼져 있으며, `DEBUG` 환경 변수를 사용하여 조건부로 켤 수 있습니다.
-</div>
-
 Express에서 사용되는 모든 내부 로그를 확인하려면, 앱을 실행할 때 `DEBUG` 환경 변수를
 `express:*`로 설정하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Windows에서는 다음과 같은 명령을 사용하십시오.
 
-<pre>
-<code class="language-sh" translate="no">
-> set DEBUG=express:* & node index.js
-</code>
-</pre>
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
 
 [Express 생성기](/{{ page.lang }}/starter/generator.html)가 생성한 기본 앱에 대해 이 명령을 실행하면 다음과 같이 인쇄됩니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -72,19 +60,17 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 이후 앱에 대한 요청이 이루어지면, Express 코드에 지정된 로그를 확인할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -97,11 +83,10 @@ $ DEBUG=express:* node ./bin/www
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
-</code>
-</pre>
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
 
 라우터 구현의 로그만 확인하려면 `DEBUG`의 값을 `express:router`로 설정하십시오. 마찬가지로, 애플리케이션 구현의 로그만 확인하려면 `DEBUG`의 값을 `express:application`으로 설정하십시오. 나머지도 이와 같습니다.
 
@@ -111,18 +96,36 @@ $ DEBUG=express:* node ./bin/www
 
 예를 들어 `$ express sample-app`을 통해 앱을 생성하는 경우에는 다음과 같은 명령을 통해 디버그 명령문을 사용할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
-</code>
-</pre>
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
 
 다음과 같이 쉼표로 구분된 이름 목록을 지정하면 2개 이상의 디버그 네임스페이스를 지정할 수 있습니다.
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
-`debug`에 대한 자세한 정보는 [debug](https://www.npmjs.com/package/debug)를 참조하십시오.
+## Advanced options
+
+When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
+
+| Name                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `DEBUG`             | Enables/disables specific debugging namespaces.   |
+| `DEBUG_COLORS`      | Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH`       | Object inspection depth.                          |
+| `DEBUG_FD`          | File descriptor to write debug output to.         |
+| `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects.     |
+
+{% capture debug-text %}
+
+The environment variables beginning with `DEBUG_` end up being
+converted into an Options object that gets used with `%o`/`%O` formatters.
+See the Node.js documentation for
+[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+for the complete list.
+
+{% endcapture %}
+
+{% include admonitions/note.html content=debug-text %}

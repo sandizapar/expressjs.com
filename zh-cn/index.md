@@ -1,50 +1,61 @@
 ---
 layout: home
-title: Express - Node.js Web 应用程序框架
+title: Express - Node.js web 应用框架
+description: "Express 是 Node.js 的一个快速、灵活、极简的Web框架，为网页和移动应用提供了一套强大的功能特性。"
 menu: home
-lang: zh-cn
+redirect_from: "  "
 ---
+
 <section id="home-content">
-  {% include header/header-{{ page.lang }}.html %}
-  <div id="overlay"></div>
   <div id="homepage-leftpane" class="pane">
     <section id="description">
-        <div class="express"><a href="/">Express</a></div>
-        <span class="description">高度包容、快速而极简的 <a href='http://nodejs.org'>Node.js</a> Web 框架</span>
+        <div class="express"><span>Express</span><a href="https://github.com/expressjs/express/releases" id="express-version">{{ site.data.express.current_version }}</a></div>
+        <h1 class="description">快速、灵活、极简的 <a href='https://nodejs.org/en/'>Node.js</a> Web 框架</h1>
     </section>
-    <div id="install-command">$ npm install express --save</div>
+    <pre class="install-command"><code>$ npm install express --save</code></pre>
   </div>
-  <div id="homepage-rightpane" class="pane">
-    <iframe src="https://www.youtube.com/embed/HxGt_3F0ULg" frameborder="0" allowfullscreen></iframe>
+
+  <div id="homepage-rightpane" class="pane" markdown="1">
+
+```javascript
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
   </div>
 </section>
 
-<!--<section id="doc-langs" markdown="1">
-Express 文档英文以外的语言版本包括：[西班牙语](/es)、[日语](/ja)、[俄语](/ru)、[中文](/zh-cn)、[韩国语](/ko)、[葡萄牙语](/pt-br)。
-</section>-->
+{% if site.announcement %}
+
+<section id="announcements">
+  {% include announcement.html %}
+</section>
+{% endif %}
 
 <section id="intro">
-
   <div id="boxes" class="clearfix">
-      <div id="web-applications">
-          <h3>Web 应用程序</h3> Express 是一种保持最低程度规模的灵活 Node.js Web 应用程序框架，为 Web 和移动应用程序提供一组强大的功能。</div>
-
-      <div id="apis">
-          <h3>API</h3> 使用您提议的各种 HTTP 实用程序方法和中间件，快速方便地创建强大的 API。</div>
-
-      <div id="performance">
-          <h3>性能</h3> Express 提供精简的基本 Web 应用程序功能，而不会隐藏您了解和青睐的 Node.js 功能。</div>
-
-      <div id="frameworks">
-          <h3>框架</h3> 许多基于 Express 的 <a href="{{ page.lang }}/resources/frameworks.html">流行框架</a> 。
-      </div>
-
+    <div id="web-applications">
+      <h2>Web 应用开发</h2> Express 是一个简洁灵活的 Node.js Web 应用框架，为网页和移动应用提供了一套强大的功能特性。
+    </div>
+    <div id="apis">
+      <h2>API 开发</h2> 借助丰富的 HTTP 工具方法和中间件支持，快速构建健壮的 API 接口易如反掌。
+    </div>
+    <div id="performance">
+      <h2>性能表现</h2> Express 提供基础的 Web 应用功能薄层封装，绝不遮蔽您熟悉且喜爱的原生 Node.js 特性。
+    </div>
+    <div id="middleware">
+      <h2>中间件</h2> 
+      Express是一个轻量和灵活的路由框架，核心功能最小， 
+      将通过使用Express <a href="{{ page.lang }}/resources/middleware.html">中间件</a> 模块来增加。
+    </div>
   </div>
-
 </section>
-
-<!--
-<section id="announcements">
-  {% include announcement/announcement-{{ page.lang }}.md %}
-</section>
--->

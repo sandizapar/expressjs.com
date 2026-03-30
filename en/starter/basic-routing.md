@@ -1,11 +1,12 @@
 ---
 layout: page
 title: Express basic routing
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: en
+order: 4
 redirect_from: "/starter/basic-routing.html"
 ---
-<div id="page-doc" markdown="1">
+
 # Basic routing
 
 _Routing_ refers to determining how an application responds to a client request to a particular endpoint, which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
@@ -21,7 +22,7 @@ app.METHOD(PATH, HANDLER)
 Where:
 
 - `app` is an instance of `express`.
-- `METHOD` is an [HTTP request method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods), in lowercase.
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` is a path on the server.
 - `HANDLER` is the function executed when the route is matched.
 
@@ -34,15 +35,15 @@ The following examples illustrate defining simple routes.
 Respond with `Hello World!` on the homepage:
 
 ```js
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 ```
 
-Respond to POST request on the root route (`/`), the application's home page:
+Respond to a POST request on the root route (`/`), the application's home page:
 
 ```js
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
   res.send('Got a POST request')
 })
 ```
@@ -50,7 +51,7 @@ app.post('/', function (req, res) {
 Respond to a PUT request to the `/user` route:
 
 ```js
-app.put('/user', function (req, res) {
+app.put('/user', (req, res) => {
   res.send('Got a PUT request at /user')
 })
 ```
@@ -58,10 +59,10 @@ app.put('/user', function (req, res) {
 Respond to a DELETE request to the `/user` route:
 
 ```js
-app.delete('/user', function (req, res) {
+app.delete('/user', (req, res) => {
   res.send('Got a DELETE request at /user')
 })
 ```
 
 For more details about routing, see the [routing guide](/{{ page.lang }}/guide/routing.html).
-</div>
+

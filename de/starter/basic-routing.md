@@ -1,27 +1,28 @@
 ---
 layout: page
 title: Basisrouting in Express
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: de
+order: 4
+redirect_from: "  "
 ---
 
 # Basisrouting
 
-Per *Routing* wird bestimmt, wie eine Antwort auf eine Clientanforderung an einem bestimmten Endpunkt antwortet. Dies ist eine URI (oder ein Pfad) und eine bestimmte HTTP-Anforderungsmethode (GET, POST usw.).
+Per _Routing_ wird bestimmt, wie eine Antwort auf eine Clientanforderung an einem bestimmten Endpunkt antwortet. Dies ist eine URI (oder ein Pfad) und eine bestimmte HTTP-Anforderungsmethode (GET, POST usw.).
 
 Jede Weiterleitung (Route) kann eine oder mehrere Handlerfunktionen haben, die ausgeführt werden, wenn die Weiterleitung abgeglichen wird.
 
 Weiterleitungsdefinitionen haben die folgende Struktur:
-<pre>
-<code class="language-javascript" translate="no">
-app.METHOD(PATH, HANDLER)
-</code>
-</pre>
 
-Bedeutung:
+```js
+app.METHOD(PATH, HANDLER)
+```
+
+Where:
 
 - `app` ist eine Instanz von `express`.
-- `METHOD` ist eine [HTTP-Anforderungsmethode](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` ist ein Pfad auf dem Server.
 - `HANDLER` ist die Funktion, die ausgeführt wird, wenn die Weiterleitung abgeglichen wird.
 
@@ -33,42 +34,35 @@ Die folgenden Beispiele veranschaulichen das Definieren einfacher Weiterleitunge
 
 Antworten Sie mit `Hello World!` auf der Homepage:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
-Antworten Sie auf POST-Anforderungen auf die Weiterleitung zum Stammverzeichnis (`/`), der Homepage der Anwendung:
+Respond to a POST request on the root route (`/`), the application's home page:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 Antworten Sie auf eine PUT-Anforderung zur Weiterleitung `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 Antworten Sie auf eine DELETE-Anforderung zur Weiterleitung `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 Details zum Thema Routing finden Sie in der entsprechenden [Routinganleitung](/{{ page.lang }}/guide/routing.html).
+

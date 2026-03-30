@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Exemplo "Hello World" do Express
+description: Get started with Express.js by building a simple 'Hello World' application, demonstrating the basic setup and server creation for beginners.
 menu: starter
-lang: pt-br
+order: 2
+redirect_from: "  "
 ---
 
 # Exemplo Hello World
@@ -14,31 +16,32 @@ que cria a estrutura para um aplicativo completo com inúmeros arquivos JavaScri
 propósitos.
 </div>
 
+```js
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+O aplicativo inicia um servidor e escuta a porta 3000 por
+conexões. O aplicativo responde com "Hello World!" à solicitações
+para a URL raiz (`/`) ou _rota_. Para
+todos os outros caminhos, ele irá responder com um **404 Não Encontrado**.
+
+### Executando localmente
+
 Primeiro crie um diretório chamado `myapp`,
 mude para ele e execute o `npm init`. Em seguida
 instale o `express` como uma dependência, de acordo com o [guia de instalação](/{{ page.lang }}/starter/installing.html).
 
 No diretório `myapp`, crie um arquivo chamado `app.js` e inclua o seguinte código:
-
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var app = express();
-
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
-</code>
-</pre>
-
-O aplicativo inicia um servidor e escuta a porta 3000 por
-conexões. O aplicativo responde com "Hello World!" à solicitações
-para a URL raiz (`/`) ou *rota*. Para
-todos os outros caminhos, ele irá responder com um **404 Não Encontrado**.
 
 <div class="doc-box doc-notice" markdown="1">
 O `req` (solicitação) e `res`
@@ -50,12 +53,9 @@ que desejaria fazer sem o envolvimento do Express.
 
 Execute o aplicativo com o seguinte comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ node app.js
-</code>
-</pre>
+```
 
 Em seguida, carregue [http://localhost:3000/](http://localhost:3000/) em
 um navegador para visualizar a saída
-

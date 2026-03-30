@@ -4,12 +4,12 @@ Routes HTTP GET requests to the specified path with the specified callback funct
 
 {% include api/en/4x/routing-args.html %}
 
-For more information, see the [routing guide](/guide/routing.html).
+For more information, see the [routing guide](/{{page.lang}}/guide/routing.html).
 
 #### Example
 
 ```js
 app.get('/', function (req, res) {
-  res.send('GET request to homepage');
-});
+  res.send('GET request to homepage')
+})
 ```

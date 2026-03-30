@@ -1,7 +1,7 @@
 <h2 id="router">Router</h2>
 
 <section markdown="1">
-A `router` object is an isolated instance of middleware and routes. You can think of it
+A `router` object is an instance of middleware and routes. You can think of it
 as a "mini-application," capable only of performing middleware and routing
 functions. Every Express application has a built-in app router.
 
@@ -15,24 +15,26 @@ and so on) to it just like an application.  For example:
 
 ```js
 // invoked for any requests passed to this router
-router.use(function(req, res, next) {
+router.use(function (req, res, next) {
   // .. some logic here .. like any other middleware
-  next();
-});
+  next()
+})
 
 // will handle any request that ends in /events
 // depends on where the router is "use()'d"
-router.get('/events', function(req, res, next) {
+router.get('/events', function (req, res, next) {
   // ..
-});
+})
 ```
 
 You can then use a router for a particular root URL in this way separating your routes into files or even mini-apps.
 
 ```js
 // only requests to /calendar/* will be sent to our "router"
-app.use('/calendar', router);
+app.use('/calendar', router)
 ```
+
+Keep in mind that any middleware applied to a router will run for all requests on that router's path, even those that aren't part of the router.
 
 
 </section>

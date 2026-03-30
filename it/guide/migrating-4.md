@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Migrazione a Express 4
+description: A guide to migrating your Express.js applications from version 3 to 4, covering changes in middleware, routing, and how to update your codebase effectively.
 menu: guide
-lang: it
+order: 9
+redirect_from: "  "
 ---
 
 # Passaggio a Express 4
@@ -24,7 +26,7 @@ Argomenti di questo articolo:
 Sono state apportate diverse modifiche importanti alla versione Express 4:
 
 <ul class="doclist">
-  <li><a href="#core-changes">Modifiche al sistema middleware e al core di Express.</a> Le dipendenze su Connect e il middleware integrato sono state rimosse, pertanto è necessario aggiungere il middleware manualmente.
+  <li><a href="#core-changes">Changes to Express core and middleware system.</a> The dependencies on Connect and built-in middleware were removed, so you must add middleware yourself.
   </li>
   <li><a href="#routing">Modifiche al sistema di routing.</a></li>
   <li><a href="#other-changes">Altre modifiche.</a></li>
@@ -32,8 +34,8 @@ Sono state apportate diverse modifiche importanti alla versione Express 4:
 
 Consultare inoltre:
 
-* [Nuove funzioni in 4.x.](https://github.com/strongloop/express/wiki/New-features-in-4.x)
-* [Migrazione da 3.x a 4.x.](https://github.com/strongloop/express/wiki/Migrating-from-3.x-to-4.x)
+- [Nuove funzioni in 4.x.](https://github.com/expressjs/express/wiki/New-features-in-4.x)
+- [Migrazione da 3.x a 4.x.](https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x)
 
 <h3 id="core-changes">
 Modifiche al sistema middleware e al core di Express
@@ -54,7 +56,7 @@ middleware richiesto per eseguire l'applicazione. Seguire semplicemente questi p
 La seguente tabella elenca il middleware Express 3 e le relative controparti in Express 4.
 
 <table class="doctable" border="1">
-<tr><th>Express 3</th><th>Express 4</th></tr>
+<tbody><tr><th>Express 3</th><th>Express 4</th></tr>
 <tr><td><code>express.bodyParser</code></td>
 <td><a href="https://github.com/expressjs/body-parser">body-parser</a> +
 <a href="https://github.com/expressjs/multer">multer</a></td></tr>
@@ -86,7 +88,7 @@ La seguente tabella elenca il middleware Express 3 e le relative controparti in 
 <td><a href="https://github.com/expressjs/serve-index">serve-index</a></td></tr>
 <tr><td><code>express.static</code></td>
 <td><a href="https://github.com/expressjs/serve-static">serve-static</a></td></tr>
-</table>
+</tbody></table>
 
 Segue l'[elenco completo](https://github.com/senchalabs/connect#middleware) di middleware Express 4.
 
@@ -99,14 +101,13 @@ GitHub.
 Nella versione 4 è possibile utilizzare un parametro di variabile per definire il percorso in cui vengono caricate le funzioni middleware, quindi leggere il valore del parametro dal programma di gestione route.
 Ad esempio:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.use('/book/:id', function(req, res, next) {
-  console.log('ID:', req.params.id);
-  next();
-});
-</code>
-</pre>
+```js
+app.use('/book/:id', (req, res, next) => {
+  console.log('ID:', req.params.id)
+  next()
+})
+```
+
 <h3 id="routing">
 Il sistema di routing
 </h3>
@@ -119,8 +120,9 @@ Il modo in cui viene definita la route non è cambiato ma il sistema di routing 
 funzioni utili per organizzare le route:
 
 {: .doclist }
-* Un nuovo metodo, `app.route()`, per creare handler di route a catena per un percorso route.
-* Un nuova classe, `express.Router`, per creare handler di route assemblabili in modo modulare.
+
+- Un nuovo metodo, `app.route()`, per creare handler di route a catena per un percorso route.
+- Un nuova classe, `express.Router`, per creare handler di route assemblabili in modo modulare.
 
 <h4 id="app-route">Metodo <code>app.route()</code></h4>
 
@@ -130,20 +132,18 @@ sulle route, consultare la documentazione [`Router()`](/{{ page.lang }}/4x/api.h
 
 Segue un esempio di handler di route a catena definiti utilizzando la funzione `app.route()`.
 
-<pre>
-<code class="language-javascript" translate="no">
+```js
 app.route('/book')
-  .get(function(req, res) {
-    res.send('Get a random book');
+  .get((req, res) => {
+    res.send('Get a random book')
   })
-  .post(function(req, res) {
-    res.send('Add a book');
+  .post((req, res) => {
+    res.send('Add a book')
   })
-  .put(function(req, res) {
-    res.send('Update the book');
-  });
-</code>
-</pre>
+  .put((req, res) => {
+    res.send('Update the book')
+  })
+```
 
 <h4 id="express-router">Classe <code>express.Router</code></h4>
 
@@ -157,38 +157,36 @@ si definiscono alcune route e si caricano su un percorso nell'applicazione princ
 Ad esempio, creare un file router denominato `birds.js` nella directory dell'applicazione,
 con i seguenti contenuti:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var router = express.Router();
+```js
+var express = require('express')
+var router = express.Router()
 
 // middleware specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+router.use((req, res, next) => {
+  console.log('Time: ', Date.now())
+  next()
+})
 // define the home page route
-router.get('/', function(req, res) {
-  res.send('Birds home page');
-});
+router.get('/', (req, res) => {
+  res.send('Birds home page')
+})
 // define the about route
-router.get('/about', function(req, res) {
-  res.send('About birds');
-});
+router.get('/about', (req, res) => {
+  res.send('About birds')
+})
 
-module.exports = router;
-</code>
-</pre>
+module.exports = router
+```
 
 Successivamente, caricare il modulo router nell'applicazione:
 
-<pre>
-<code class="language-javascript" translate="no">
-var birds = require('./birds');
-...
-app.use('/birds', birds);
-</code>
-</pre>
+```js
+var birds = require('./birds')
+
+// ...
+
+app.use('/birds', birds)
+```
 
 L'applicazione sarà ora in grado di gestire le richieste per i percorsi `/birds` e
 `/birds/about` e chiamerà il middleware `timeLog`
@@ -201,7 +199,7 @@ Altre modifiche
 La seguente tabella elenca altre piccole ma importanti modifiche applicate a Express 4:
 
 <table class="doctable" border="1">
-<tr>
+<tbody><tr>
 <th>Oggetto</th>
 <th>Descrizione</th>
 </tr>
@@ -311,7 +309,7 @@ La funzionalità ora è limitata alla sola impostazione del valore cookie di bas
 `res.cookie()` per aggiungere altre funzionalità.
 </td>
 </tr>
-</table>
+</tbody></table>
 
 <h2 id="example-migration">Esempio di migrazione dell'applicazione</h2>
 
@@ -326,49 +324,46 @@ Applicazione con la versione 3
 
 Prendere in considerazione l'applicazione Express v.3 con il seguente file `app.js`:
 
-<pre>
-<code class="language-javascript" translate="no">
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
+```js
+var express = require('express')
+var routes = require('./routes')
+var user = require('./routes/user')
+var http = require('http')
+var path = require('path')
 
-var app = express();
+var app = express()
 
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.methodOverride());
-app.use(express.session({ secret: 'your secret here' }));
-app.use(express.bodyParser());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3000)
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+app.use(express.favicon())
+app.use(express.logger('dev'))
+app.use(express.methodOverride())
+app.use(express.session({ secret: 'your secret here' }))
+app.use(express.bodyParser())
+app.use(app.router)
+app.use(express.static(path.join(__dirname, 'public')))
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler())
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', routes.index)
+app.get('/users', user.list)
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-</code>
-</pre>
+http.createServer(app).listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'))
+})
+```
 
 <h4 id=""><code>package.json</code></h4>
 
 Il file `package.json` della versione 3 associata deve
 apparire come segue:
 
-<pre>
-<code class="language-javascript" translate="no">
+```json
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -378,38 +373,35 @@ apparire come segue:
   },
   "dependencies": {
     "express": "3.12.0",
-    "jade": "*"
+    "pug": "*"
   }
 }
-</code>
-</pre>
+```
 
 <h3 id="">
 Processo
 </h3>
 
 Iniziare il processo di migrazione installando il middleware richiesto per l'applicazione
-Express 4 e aggiornando Express e Jade alla versione aggiornata
+Express 4 e aggiornando Express e Pug alla versione aggiornata
 con il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest jade@latest --save
-</code>
-</pre>
+```bash
+$ npm install serve-favicon morgan method-override express-session body-parser multer errorhandler express@latest pug@latest --save
+```
 
 Apportare le seguenti modifiche a `app.js`:
 
 1. Le funzioni middleware di Express integrate `express.favicon`,
-    `express.logger`, `express.methodOverride`,
-    `express.session`, `express.bodyParser` e
-    `express.errorHandler` non sono più disponibili nell'oggetto
-    `express`.  È necessario installare le funzioni alternative
-    manualmente e caricarle sull'applicazione.
+   `express.logger`, `express.methodOverride`,
+   `express.session`, `express.bodyParser` e
+   `express.errorHandler` non sono più disponibili nell'oggetto
+   `express`. È necessario installare le funzioni alternative
+   manualmente e caricarle sull'applicazione.
 
 2. Non è più necessario caricare la funzione `app.router`.
-    Non è un oggetto applicazione Express 4 valido, pertanto rimuovere il codice
-    `app.use(app.router);`.
+   Non è un oggetto applicazione Express 4 valido, pertanto rimuovere il codice
+   `app.use(app.router);`.
 
 3. Assicurarsi che le funzioni middleware siano state caricate nell'ordine corretto - caricare `errorHandler` dopo aver caricato le route dell'applicazione.
 
@@ -419,8 +411,7 @@ Apportare le seguenti modifiche a `app.js`:
 
 L'esecuzione del comando `npm` aggiornerà `package.json` come segue:
 
-<pre>
-<code class="language-javascript" translate="no">
+```json
 {
   "name": "application-name",
   "version": "0.0.1",
@@ -433,76 +424,77 @@ L'esecuzione del comando `npm` aggiornerà `package.json` come segue:
     "errorhandler": "^1.1.1",
     "express": "^4.8.0",
     "express-session": "^1.7.2",
-    "jade": "^1.5.0",
+    "pug": "^2.0.0",
     "method-override": "^2.1.2",
     "morgan": "^1.2.2",
     "multer": "^0.1.3",
     "serve-favicon": "^2.0.1"
   }
 }
-</code>
-</pre>
+```
 
 <h4 id=""><code>app.js</code></h4>
 
 Successivamente, rimuovere il codice non valido, caricare il middleware richiesto e apportare le modifiche
 necessarie. Il file `app.js` apparirà come segue:
 
-<pre>
-<code class="language-javascript" translate="no">
-var http = require('http');
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var path = require('path');
+```js
+var http = require('http')
+var express = require('express')
+var routes = require('./routes')
+var user = require('./routes/user')
+var path = require('path')
 
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var methodOverride = require('method-override');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var errorHandler = require('errorhandler');
+var favicon = require('serve-favicon')
+var logger = require('morgan')
+var methodOverride = require('method-override')
+var session = require('express-session')
+var bodyParser = require('body-parser')
+var multer = require('multer')
+var errorHandler = require('errorhandler')
 
-var app = express();
+var app = express()
 
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(methodOverride());
-app.use(session({ resave: true,
-                  saveUninitialized: true,
-                  secret: 'uwotm8' }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(multer());
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3000)
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
+app.use(logger('dev'))
+app.use(methodOverride())
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: 'uwotm8'
+}))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(multer())
+app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', routes.index)
+app.get('/users', user.list)
 
 // error handling middleware should be loaded after the loading the routes
-if ('development' == app.get('env')) {
-  app.use(errorHandler());
+if (app.get('env') === 'development') {
+  app.use(errorHandler())
 }
 
-var server = http.createServer(app);
-server.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-</code>
-</pre>
+var server = http.createServer(app)
+server.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'))
+})
+```
 
 <div class="doc-box doc-info" markdown="1">
 A meno che non sia necessario gestire direttamente il modulo `http` (socket.io/SPDY/HTTPS), il relativo caricamento non è richiesto e l'applicazione può essere avviata semplicemente come segue:
-<pre>
-<code class="language-js" translate="no">app.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});</code>
-</pre>
+
+```js
+app.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'))
+})
+```
+
 </div>
 
 <h3 id="">Eseguire l'applicazione</h3>
@@ -510,42 +502,37 @@ A meno che non sia necessario gestire direttamente il modulo `http` (socket.io/S
 Il processo di migrazione è stato completato e ora l'applicazione
 è stata aggiornata a Express 4. Per confermare, avviare l'applicazione utilizzando il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ node .
-</code>
-</pre>
+```
 
 Caricare [http://localhost:3000](http://localhost:3000)
-  e visualizzare la home page sottoposta a rendering da Express 4.
+e visualizzare la home page sottoposta a rendering da Express 4.
 
 <h2 id="app-gen">Aggiornamento al programma di creazione dell'applicazione Express 4</h2>
 
 Lo strumento della riga comandi per generare un'applicazione Express è sempre
-  `express` ma per effettuare l'aggiornamento alla nuova versione è necessario disinstallare
-  il programma di creazione dell'applicazione di Express 3 e successivamente installare il nuovo
-  `express-generator`.
+`express` ma per effettuare l'aggiornamento alla nuova versione è necessario disinstallare
+il programma di creazione dell'applicazione di Express 3 e successivamente installare il nuovo
+`express-generator`.
 
 <h3 id="">Installazione</h3>
 
 Se il programma di creazione dell'applicazione di Express 3 è già installato sul sistema,
 è necessario disinstallarlo:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ npm uninstall -g express
-</code>
-</pre>
+```
+
 A seconda di come sono configurati i privilegi del file e della directory,
 potrebbe essere necessario eseguire questo comando con `sudo`.
 
 Ora, installare il nuovo programma di creazione:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ npm install -g express-generator
-</code>
-</pre>
+```
 
 A seconda di come sono configurati i privilegi del file e della directory,
 potrebbe essere necessario eseguire questo comando con `sudo`.
@@ -558,19 +545,18 @@ di Express 4.
 L'utilizzo e le opzioni del comando sono rimaste quasi gli stessi, con le seguenti eccezioni:
 
 {: .doclist }
-* È stata rimossa l'opzione `--sessions`.
-* È stata rimossa l'opzione `--jshtml`.
-* È stata aggiunta l'opzione `--hogan` per supportare [Hogan.js](http://twitter.github.io/hogan.js/).
+
+- È stata rimossa l'opzione `--sessions`.
+- È stata rimossa l'opzione `--jshtml`.
+- È stata aggiunta l'opzione `--hogan` per supportare [Hogan.js](http://twitter.github.io/hogan.js/).
 
 <h3 id="">Esempio</h3>
 
 Eseguire il seguente comando per creare un'applicazione Express 4:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express app4
-</code>
-</pre>
+```
 
 Se si visualizzano i contenuti del file `app4/app.js`, si noterà che tutte le funzioni
 middleware (ad eccezione di `express.static`) richieste per l'applicazione,
@@ -581,11 +567,9 @@ Si noterà inoltre che il file `app.js` è ora un modulo Node.js, diversamente d
 
 Dopo aver installato le dipendenze, avviare l'applicazione utilizzando il seguente comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ npm start
-</code>
-</pre>
+```
 
 Se si visualizza lo script di avvio npm nel file `package.json`,
 si noterà che il comando effettivo che avvia l'applicazione è
@@ -607,27 +591,23 @@ Per rimuovere la directory `www` e conservare le cose "come farebbe Express 3",
 cancellare la riga in cui viene riportata la dicitura `module.exports = app;` alla fine del file
 `app.js`, quindi incollare il seguente codice al proprio posto:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('port', process.env.PORT || 3000);
+```js
+app.set('port', process.env.PORT || 3000)
 
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
-</code>
-</pre>
+var server = app.listen(app.get('port'), () => {
+  debug('Express server listening on port ' + server.address().port)
+})
+```
 
 Assicurarsi di caricare il modulo `debug` all'inizio del file `app.js` utilizzando il seguente codice:
 
-<pre>
-<code class="language-javascript" translate="no">
-var debug = require('debug')('app4');
-</code>
-</pre>
+```js
+var debug = require('debug')('app4')
+```
 
 Successivamente, modificare `"start": "node ./bin/www"` nel file `package.json` in `"start": "node app.js"`.
 
 È stata spostata la funzionalità di `./bin/www` di nuovo in
-`app.js`.  Questa modifica non è consigliata, ma questa prova consente di comprendere in che modo funziona
+`app.js`. Questa modifica non è consigliata, ma questa prova consente di comprendere in che modo funziona
 il file `./bin/www` e perché il file `app.js`
 non si avvia più in modo autonomo.

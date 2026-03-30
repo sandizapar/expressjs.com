@@ -1,11 +1,12 @@
 ---
 layout: page
 title: Express FAQ
+description: Find answers to frequently asked questions about Express.js, including topics on application structure, models, authentication, template engines, error handling, and more.
 menu: starter
-lang: en
+order: 7
 redirect_from: "/starter/faq.html"
 ---
-<div id="page-doc" markdown="1">
+
 # FAQ
 
 ## How should I structure my application?
@@ -18,9 +19,9 @@ Routes and other application-specific logic can live in as many files
 as you wish, in any directory structure you prefer. View the following
 examples for inspiration:
 
-* [Route listings](https://github.com/strongloop/express/blob/4.13.1/examples/route-separation/index.js#L32-47)
-* [Route map](https://github.com/strongloop/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
-* [MVC style controllers](https://github.com/strongloop/express/tree/master/examples/mvc)
+* [Route listings](https://github.com/expressjs/express/blob/4.13.1/examples/route-separation/index.js#L32-L47)
+* [Route map](https://github.com/expressjs/express/blob/4.13.1/examples/route-map/index.js#L52-L66)
+* [MVC style controllers](https://github.com/expressjs/express/tree/master/examples/mvc)
 
 Also, there are third-party extensions for Express, which simplify some of these patterns:
 
@@ -37,8 +38,8 @@ See [LoopBack](http://loopback.io) for an Express-based framework that is center
 ## How can I authenticate users?
 
 Authentication is another opinionated area that Express does not
-venture into.  You may use any authentication scheme you wish.
-For a simple username / password scheme, see [this example](https://github.com/strongloop/express/tree/master/examples/auth).
+venture into. You may use any authentication scheme you wish.
+For a simple username / password scheme, see [this example](https://github.com/expressjs/express/tree/master/examples/auth).
 
 
 ## Which template engines does Express support?
@@ -47,6 +48,8 @@ Express supports any template engine that conforms with the `(path, locals, call
 To normalize template engine interfaces and caching, see the
 [consolidate.js](https://github.com/visionmedia/consolidate.js)
 project for support. Unlisted template engines might still support the Express signature.
+
+For more information, see [Using template engines with Express](/{{page.lang}}/guide/using-template-engines.html).
 
 ## How do I handle 404 responses?
 
@@ -59,10 +62,13 @@ do is add a middleware function at the very bottom of the stack (below all other
 to handle a 404 response:
 
 ```js
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that!")
 })
 ```
+
+Add routes dynamically at runtime on an instance of `express.Router()`
+so the routes are not superseded by a middleware function.
 
 ## How do I setup an error handler?
 
@@ -70,7 +76,7 @@ You define error-handling middleware in the same way as other middleware,
 except with four arguments instead of three; specifically with the signature `(err, req, res, next)`:
 
 ```js
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack)
   res.status(500).send('Something broke!')
 })
@@ -84,4 +90,8 @@ You don't! There's no need to "render" HTML with the `res.render()` function.
 If you have a specific file, use the `res.sendFile()` function.
 If you are serving many assets from a directory, use the `express.static()`
 middleware function.
-</div>
+
+## What version of Node.js does Express require?
+
+* [Express 4.x](/{{ page.lang }}/4x/api.html) requires Node.js 0.10 or higher.
+* [Express 5.x](/{{ page.lang }}/5x/api.html) requires Node.js 18 or higher.

@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Gerador de aplicativos do Express
+description: Learn how to use the Express application generator tool to quickly create a skeleton for your Express.js applications, streamlining setup and configuration.
 menu: starter
-lang: pt-br
+order: 3
+redirect_from: "  "
 ---
 
 # Gerador de aplicativos do Express
@@ -10,21 +12,25 @@ lang: pt-br
 Use a ferramenta geradora de aplicativos, `express`,
 para rapidamente criar uma estrutura básica de aplicativo.
 
-Instale o `express` com o comando a seguir:
+You can run the application generator with the `npx` command (available in Node.js 8.2.0).
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install express-generator -g
-</code>
-</pre>
+```bash
+$ npx express-generator
+```
+
+For earlier Node versions, install the application generator as a global npm package and then launch it:
+
+```bash
+$ npm install -g express-generator
+$ express
+```
 
 Exiba as opções de comando com a opção `-h`:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express -h
 
-  Usage: express [options][dir]
+  Usage: express [options] [dir]
 
   Options:
 
@@ -34,18 +40,17 @@ $ express -h
         --hbs           add handlebars engine support
         --pug           add pug engine support
     -H, --hogan         add hogan.js engine support
-    -v, --view &lt;engine&gt; add view &lt;engine&gt; support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-    -c, --css &lt;engine&gt;  add stylesheet &lt;engine&gt; support (less|stylus|compass|sass) (defaults to plain css)
+        --no-view       generate without view engine
+    -v, --view <engine> add view <engine> support (ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+    -c, --css <engine>  add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
         --git           add .gitignore
     -f, --force         force on non-empty directory
-</code>
-</pre>
+```
 
 Por exemplo, o seguinte cria um aplicativo do Express chamado _myapp_
-no diretório atualmente em funcionamento:
+no diretório atualmente em funcionamento: The app will be created in a folder named _myapp_ in the current working directory and the view engine will be set to <a href="https://pugjs.org/" target="_blank" title="Pug documentation">Pug</a>:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ express --view=pug myapp
 
    create : myapp
@@ -65,41 +70,38 @@ $ express --view=pug myapp
    create : myapp/views/error.pug
    create : myapp/bin
    create : myapp/bin/www
-</code>
-</pre>
+```
 
 Em seguida instale as dependências:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ cd myapp
 $ npm install
-</code>
-</pre>
+```
 
 No MacOS ou Linux, execute o aplicativo com este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=myapp:* npm start
-</code>
-</pre>
+```
 
 No Windows, use este comando:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 > set DEBUG=myapp:* & npm start
-</code>
-</pre>
+```
+
+Instale o `express` com o comando a seguir:
+
+```bash
+PS> $env:DEBUG='myapp:*'; npm start
+```
 
 Em seguida carregue `http://localhost:3000/` no seu navegador para acessar o aplicativo.
 
-
 O aplicativo gerado possui a seguinte estrutura de diretórios:
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 .
 ├── app.js
 ├── bin
@@ -119,10 +121,8 @@ O aplicativo gerado possui a seguinte estrutura de diretórios:
     └── layout.pug
 
 7 directories, 9 files
-</code>
-</pre>
+```
 
 <div class="doc-box doc-info" markdown="1">
-A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express.
-É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
+A estrutura de aplicativo criada pelo gerador é apenas uma das várias maneiras de estruturar aplicativos do Express. É possível utilizar esta estrutura ou modificá-la para melhor se adequar às suas necessidades.
 </div>

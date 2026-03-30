@@ -1,41 +1,29 @@
 ---
 layout: page
 title: Débogage d'Express
+description: Learn how to enable and use debugging logs in Express.js applications by setting the DEBUG environment variable for enhanced troubleshooting.
 menu: guide
-lang: fr
+order: 7
+redirect_from: "  "
 ---
 
 # Débogage d'Express
 
-Express fait appel au module [debug](https://www.npmjs.com/package/debug) en interne
-pour journaliser les informations concernant les correspondances de route, les fonctions middleware utilisées, le
-mode de l'application ainsi que le flux du cycle de demande-réponse.
-
-<div class="doc-box doc-info" markdown="1">
-Le module `debug` est en quelque sorte une version étendue de `console.log`, mais contrairement à ce dernier,`` vous n'avez pas besoin de mettre en commentaire les journaux de
-`debug` dans le code de production. La journalisation est désactivée par défaut et peut être activée de manière conditionnelle à l'aide de la variable d'environnement `DEBUG`.
-</div>
-
 Pour afficher tous les journaux internes utilisés dans Express, affectez à la variable d'environnement `DEBUG` la valeur `express:*` lors du lancement de votre application.
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=express:* node index.js
-</code>
-</pre>
+```
 
 Sous Windows, utilisez la commande correspondante.
 
-<pre>
-<code class="language-sh" translate="no">
-> set DEBUG=express:* & node index.js
-</code>
-</pre>
+```bash
+> $env:DEBUG = "express:*"; node index.js
+```
 
 L'exécution de cette commande sur l'application par défaut générée par le [générateur express](/{{ page.lang }}/starter/generator.html) imprime le résultat suivant :
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=express:* node ./bin/www
   express:router:route new / +0ms
   express:router:layer new / +1ms
@@ -71,19 +59,17 @@ $ DEBUG=express:* node ./bin/www
   express:router:layer new / +1ms
   express:router use /users router +0ms
   express:router:layer new /users +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-  express:router use / &lt;anonymous&gt; +0ms
+  express:router use / &amp;lt;anonymous&amp;gt; +0ms
   express:router:layer new / +0ms
-</code>
-</pre>
+```
 
 Si une demande est par la suite effectuée à l'application, vous verrez les journaux spécifiés dans le code Express :
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
   express:router dispatching GET / +4h
   express:router query  : / +2ms
   express:router expressInit  : / +0ms
@@ -96,32 +82,49 @@ Si une demande est par la suite effectuée à l'application, vous verrez les jou
   express:router serveStatic  : / +2ms
   express:router router  : / +2ms
   express:router dispatching GET / +1ms
-  express:view lookup "index.jade" +338ms
-  express:view stat "/projects/example/views/index.jade" +0ms
-  express:view render "/projects/example/views/index.jade" +1ms
-</code>
-</pre>
+  express:view lookup "index.pug" +338ms
+  express:view stat "/projects/example/views/index.pug" +0ms
+  express:view render "/projects/example/views/index.pug" +1ms
+```
 
 Pour afficher les journaux uniquement à partir de l'implémentation du routeur, affectez à la variable d'environnement `DEBUG` la valeur `express:router`. De la même façon, pour afficher les journaux uniquement à partir de l'implémentation de l'application, affectez à la variable d'environnement `DEBUG` la valeur `express:application`, et ainsi de suite.
 
 ## Applications générées par la commande `express`
 
-Une application générée par la commande `express` fait également appel au module `debug` et son espace de nom de débogage est délimité par le nom de l'application.
+Une application générée par la commande `express` également appel au module `debug` et son espace de nom de débogage est délimité par le nom de l'application.
 
 Ainsi, si vous avez généré l'application à l'aide de `$ express sample-app`, vous pouvez activer les instructions de débogage en exécutant la commande suivante :
 
-<pre>
-<code class="language-sh" translate="no">
-$ DEBUG=sample-app node ./bin/www
-</code>
-</pre>
+```bash
+$ DEBUG=sample-app:* node ./bin/www
+```
 
 Vous pouvez spécifier plusieurs espaces de noms de débogage en affectant une liste de noms séparés par des virgules :
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ DEBUG=http,mail,express:* node index.js
-</code>
-</pre>
+```
 
-Pour plus d'informations sur le module `debug`, voir [debug](https://www.npmjs.com/package/debug).
+## Advanced options
+
+When running through Node.js, you can set a few environment variables that will change the behavior of the debug logging:
+
+| Name                | Purpose                                                           |
+| ------------------- | ----------------------------------------------------------------- |
+| `DEBUG`             | Enables/disables specific debugging namespaces.   |
+| `DEBUG_COLORS`      | Whether or not to use colors in the debug output. |
+| `DEBUG_DEPTH`       | Object inspection depth.                          |
+| `DEBUG_FD`          | File descriptor to write debug output to.         |
+| `DEBUG_SHOW_HIDDEN` | Shows hidden properties on inspected objects.     |
+
+{% capture debug-text %}
+
+The environment variables beginning with `DEBUG_` end up being
+converted into an Options object that gets used with `%o`/`%O` formatters.
+See the Node.js documentation for
+[`util.inspect()`](https://nodejs.org/api/util.html#util_util_inspect_object_options)
+for the complete list.
+
+{% endcapture %}
+
+{% include admonitions/note.html content=debug-text %}

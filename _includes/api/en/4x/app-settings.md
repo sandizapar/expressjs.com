@@ -9,8 +9,15 @@ Exceptions: Sub-apps will inherit the value of `trust proxy` even though it has 
 Sub-apps will not inherit the value of `view cache` in production (when `NODE_ENV` is "production").
 
 <div class="table-scroller">
-  <table class="doctable" border="1">
-    <thead><tr><th id="app-settings-property">Property</th><th>Type</th><th>Description</th><th>Default</th></tr></thead>
+  <table>
+    <thead>
+      <tr>
+        <th id="app-settings-property">Property</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
     <tbody>
     <tr>
   <td markdown="1">
@@ -29,11 +36,10 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   `env`
   </td>
-      <td>String</td>
-      <td>Environment mode.
-      Be sure to set to "production" in a production environment;
-      see <a href="/advanced/best-practice-performance.html#env">Production best practices: performance and reliability</a>.
-    </td>
+  <td>String</td>
+  <td markdown="1">
+  Environment mode. Be sure to set to "production" in a production environment; see [Production best practices: performance and reliability](/{{page.lang}}/advanced/best-practice-performance.html#env).
+  </td>
   <td markdown="1">
   `process.env.NODE_ENV` (`NODE_ENV` environment variable) or "development" if `NODE_ENV` is not set.
   </td>
@@ -61,6 +67,17 @@ Sub-apps will not inherit the value of `view cache` in production (when `NODE_EN
   <td markdown="1">
   "callback"
   </td>
+    </tr>
+    <tr>
+  <td markdown="1">
+  `json escape`
+  </td>
+  <td>Boolean</td>
+  <td markdown="1">
+  Enable escaping JSON responses from the `res.json`, `res.jsonp`, and `res.send` APIs. This will escape the characters `<`, `>`, and `&` as Unicode escape sequences in JSON. The purpose of this it to assist with [mitigating certain types of persistent XSS attacks](https://blog.mozilla.org/security/2017/07/18/web-service-audits-firefox-accounts/) when clients sniff responses for HTML.
+  <p><b>NOTE</b>: Sub-apps will inherit the value of this setting.</p>
+  </td>
+  <td>N/A (undefined)</td>
     </tr>
     <tr>
   <td markdown="1">
@@ -183,15 +200,17 @@ A custom query string parsing function will receive the complete query string, a
     </tr>
     </tbody>
   </table>
+  </div>
 
   <h5 id="trust.proxy.options.table">Options for `trust proxy` setting</h5>
 
   <p markdown="1">
-  Read [Express behind proxies](/guide/behind-proxies.html) for more
+  Read [Express behind proxies](/{{page.lang}}/guide/behind-proxies.html) for more
   information.
   </p>
 
-  <table class="doctable" border="1">
+<div class="table-scroller">
+  <table>
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
     <tbody>
       <tr>
@@ -216,19 +235,19 @@ A custom query string parsing function will receive the complete query string, a
 Specify a single subnet:
 
 ```js
-app.set('trust proxy', 'loopback') 
+app.set('trust proxy', 'loopback')
 ```
 
 Specify a subnet and an address:
 
 ```js
-app.set('trust proxy', 'loopback, 123.123.123.123') 
+app.set('trust proxy', 'loopback, 123.123.123.123')
 ```
 
 Specify multiple subnets as CSV:
 
 ```js
-app.set('trust proxy', 'loopback, linklocal, uniquelocal') 
+app.set('trust proxy', 'loopback, linklocal, uniquelocal')
 ```
 
 Specify multiple subnets as an array:
@@ -253,14 +272,15 @@ app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
 
 ```js
 app.set('trust proxy', function (ip) {
-  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true; // trusted IPs
-  else return false;
-});
+  if (ip === '127.0.0.1' || ip === '123.123.123.123') return true // trusted IPs
+  else return false
+})
 ```
   </td>
       </tr>
     </tbody>
   </table>
+</div>
 
   <h5 id="etag.options.table">Options for `etag` setting</h5>
 
@@ -275,7 +295,8 @@ The [express.static](#express.static) middleware ignores these settings.
   For more information, see its documentation.
   </p>
 
-  <table class="doctable" border="1">
+<div class="table-scroller">
+  <table>
     <thead><tr><th>Type</th><th>Value</th></tr></thead>
     <tbody>
       <tr>
@@ -298,8 +319,8 @@ The [express.static](#express.static) middleware ignores these settings.
 
 ```js
 app.set('etag', function (body, encoding) {
-  return generateHash(body, encoding); // consider the function is defined
-});
+  return generateHash(body, encoding) // consider the function is defined
+})
 ```
   </td>
       </tr>

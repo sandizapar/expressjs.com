@@ -1,58 +1,55 @@
 ---
 layout: page
 title: Express のインストール
+description: Learn how to install Express.js in your Node.js environment, including setting up your project directory and managing dependencies with npm.
 menu: starter
-lang: ja
+order: 1
+redirect_from: "  "
 ---
 
 # インストール
 
 既に [Node.js](https://nodejs.org/) をインストールしてあることを想定して、ここではアプリケーションを作成するディレクトリーを作り、それを作業ディレクトリーにします。
 
-<pre>
-<code class="language-sh" translate="no">
+- [Express 4.x](/{{ page.lang }}/4x/api.html) には Node.js 0.10 以上が必要です。
+- [Express 5.x](/{{ page.lang }}/5x/api.html) には Node.js 18 以上が必要です。
+
+```bash
 $ mkdir myapp
 $ cd myapp
-</code>
-</pre>
+```
 
 `npm init` コマンドを使用して、アプリケーション用の `package.json` ファイルを作成します。
 `package.json` の機能について詳しくは、[Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json) を参照してください。
+For more information on how `package.json` works, see [Specifics of npm's package.json handling](https://docs.npmjs.com/files/package.json).
 
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ npm init
-</code>
-</pre>
+```
 
-次のコマンドは、アプリケーションの名前やバージョンなど多くの情報の指定を求めるプロンプトを表示します。
-ここでは、単に RETURN キーを押し、以下を例外として大半の情報に関してデフォルトを受け入れます。
+This command prompts you for a number of things, such as the name and version of your application.
+For now, you can simply hit RETURN to accept the defaults for most of them, with the following exception:
 
-<pre>
-<code class="language-sh" translate="no">
+```
 entry point: (index.js)
-</code>
-</pre>
+```
 
-`app.js`、またはメインファイルに指定したい名前を入力します。`index.js` にする場合は、RETURN キーを押して、表示されたデフォルトのファイル名を受け入れます。
+`app.js` と入力するか、メインファイルの名前にしたいものを何か入力してください。もしそれを `index.js` にしたいのなら、RETURN キーを押して提案されたデフォルトのファイル名を受け入れてください。 If you want it to be `index.js`, hit RETURN to accept the suggested default file name.
 
-次に、Express を `app` ディレクトリーにインストールして、依存関係リストに保存します。次に例を示します。
+Expressを `myapp` ディレクトリにインストールし、それを依存関係リストに保存してください。例えば： For example:
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install express --save
-</code>
-</pre>
-
-Express を一時的にインストールして、依存関係リストに追加しない場合は、`--save` オプションを省略します。
-
-<pre>
-<code class="language-sh" translate="no">
+```bash
 $ npm install express
-</code>
-</pre>
+```
+
+Express を一時的にインストールし、それを依存関係リストに追加しないようにするには、次のようにします。
+
+```bash
+$ npm install express --no-save
+```
 
 <div class="doc-box doc-info" markdown="1">
-`--save` オプションを指定してインストールされた Node モジュールは、`package.json` ファイル内の `dependencies` リストに追加されます。
-その後、`npm install` を `app` ディレクトリーで実行すると、dependencies リスト内のモジュールが自動的にインストールされます。
+
+npm 5.0 以降のデフォルトでは、npm install はモジュールを `package.json` ファイルの `dependencies` リストに追加します。以前のバージョンの npm では、`--save` オプションを明示的に指定しなければなりません。その後、app ディレクトリで `npm install` を実行すると、依存関係リストにモジュールが自動的にインストールされます。
+ Then, afterwards, running `npm install` in the app directory will automatically install modules in the dependencies list.
 </div>

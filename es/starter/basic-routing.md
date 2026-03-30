@@ -1,27 +1,28 @@
 ---
 layout: page
 title: Direccionamiento básico de Express
+description: Learn the fundamentals of routing in Express.js applications, including how to define routes, handle HTTP methods, and create route handlers for your web server.
 menu: starter
-lang: es
+order: 4
+redirect_from: "  "
 ---
 
 # Direccionamiento básico
 
-El *direccionamiento* hace referencia a la determinación de cómo responde una aplicación a una solicitud de cliente en un determinado punto final, que es un URI (o una vía de acceso) y un método de solicitud HTTP específico (GET, POST, etc.).
+El _direccionamiento_ hace referencia a la determinación de cómo responde una aplicación a una solicitud de cliente en un determinado punto final, que es un URI (o una vía de acceso) y un método de solicitud HTTP específico (GET, POST, etc.).
 
 Cada ruta puede tener una o varias funciones de manejador, que se excluyen cuando se correlaciona la ruta.
 
-La definición de ruta tiene la siguiente estructura:
-<pre>
-<code class="language-javascript" translate="no">
+Route definition takes the following structure:
+
+```js
 app.METHOD(PATH, HANDLER)
-</code>
-</pre>
+```
 
 Donde:
 
 - `app` es una instancia de `express`.
-- `METHOD` es un [método de solicitud HTTP](http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+- `METHOD` is an [HTTP request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods), in lowercase.
 - `PATH` es una vía de acceso en el servidor.
 - `HANDLER` es la función que se ejecuta cuando se correlaciona la ruta.
 
@@ -33,42 +34,35 @@ El siguiente ejemplo ilustra la definición de rutas simples.
 
 Responda con `Hello World!` en la página inicial:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+```
 
-Responda a la solicitud POST en la ruta raíz (`/`), la página de inicio de la aplicación:
+Respond to a POST request on the root route (`/`), the application's home page:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.post('/', function (req, res) {
-  res.send('Got a POST request');
-});
-</code>
-</pre>
+```js
+app.post('/', (req, res) => {
+  res.send('Got a POST request')
+})
+```
 
 Responda a una solicitud PUT en la ruta `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.put('/user', function (req, res) {
-  res.send('Got a PUT request at /user');
-});
-</code>
-</pre>
+```js
+app.put('/user', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+```
 
 Responda a una solicitud DELETE en la ruta `/user`:
 
-<pre>
-<code class="language-javascript" translate="no">
-app.delete('/user', function (req, res) {
-  res.send('Got a DELETE request at /user');
-});
-</code>
-</pre>
+```js
+app.delete('/user', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+```
 
 Para obtener más detalles sobre el direccionamiento, consulte la [guía de direccionamiento](/{{ page.lang }}/guide/routing.html).
+

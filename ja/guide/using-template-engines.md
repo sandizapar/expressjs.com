@@ -1,60 +1,64 @@
 ---
 layout: page
 title: Express でのテンプレート・エンジンの使用
+description: Discover how to integrate and use template engines like Pug, Handlebars, and EJS with Express.js to render dynamic HTML pages efficiently.
 menu: guide
-lang: ja
+order: 5
+redirect_from: "  "
 ---
 
 # Express でのテンプレート・エンジンの使用
 
-Express でテンプレート・ファイルをレンダリングするには、その前に以下のアプリケーション設定を設定する必要があります。
+A _template engine_ enables you to use static template files in your application. _テンプレートエンジン_ を使用すると、アプリケーションで静的なテンプレートファイルを使用できます。実行時に、テンプレートエンジンはテンプレートファイルの変数を実際の値に置き換え、テンプレートをクライアントに送信するHTMLファイルに変換します。このアプローチにより、HTMLページの設計が容易になります。
+This approach makes it easier to design an HTML page.
 
-* `views`。テンプレート・ファイルが配置されるディレクトリー。例: `app.set('views', './views')`
-* `view engine`。使用するテンプレート・エンジン。例: `app.set('view engine', 'jade')`
+Expressで動作する一般的なテンプレートエンジンには、[Pug](https://pugjs.org/api/getting-started.html)、[Mustache](https://www.npmjs.com/package/mustache)、[EJS](https://www.npmjs.com/package/ejs)があります。[Expressアプリケーションジェネレータ](/{{ page.lang }}/starter/generator.html)は[Jade](https://www.npmjs.com/package/jade)をデフォルトとして使用しますが、いくつかの他のものもサポートしています。
 
-次に、対応するテンプレート・エンジンの npm パッケージをインストールします。
+テンプレートファイルをレンダリングするには、次の[アプリケーション設定プロパティ](/{{ page.lang }}/4x/api.html#app.set)を設定し、ジェネレータで作成されたデフォルトアプリの`app.js`にセットします。
 
-<pre>
-<code class="language-sh" translate="no">
-$ npm install jade --save
-</code>
-</pre>
+- `views`, the directory where the template files are located. `views`はテンプレートファイルが置かれているディレクトリ。例：`app.set('views', './views')`。これは、デフォルトではアプリケーションのルートディレクトリ内の`views`ディレクトリになります
+  This defaults to the `views` directory in the application root directory.
+- `view engine`, the template engine to use. `view engine`は使用するテンプレートエンジン。たとえば、Pugテンプレートエンジンを使用するには、`app.set('view engine', 'pug')`を使用します
 
-<div class="doc-box doc-notice" markdown="1">
-Jade などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
+次に、対応するテンプレートエンジンnpmパッケージをインストールします。たとえばPugをインストールするには：
+
+```bash
+$ npm install pug --save
+```
+
+<div class="doc-box doc-notice" markdown="1">Pug などの Express 対応テンプレート・エンジンは、`__express(filePath, options, callback)` という関数をエクスポートします。この関数は、テンプレート・コードをレンダリングするために `res.render()` 関数によって呼び出されます。
 一部のテンプレート・エンジンは、この規則に従いません。[Consolidate.js](https://www.npmjs.org/package/consolidate) ライブラリーは、すべての一般的な Node.js テンプレート・エンジンをマップすることで、この規則に従います。そのため、Express 内でシームレスに動作します。
+
+Some template engines do not follow this convention. The [@ladjs/consolidate](https://www.npmjs.com/package/@ladjs/consolidate)
+library follows this convention by mapping all of the popular Node.js template engines, and therefore works seamlessly within Express.
+
 </div>
 
 ビュー・エンジンが設定された後は、アプリケーションでエンジンを指定したり、テンプレート・エンジンをロードしたりする必要はありません。(上記の例に対応した) 下記のように、Express がモジュールを内部的にロードします。
 
-<pre>
-<code class="language-javascript" translate="no">
-app.set('view engine', 'jade');
-</code>
-</pre>
+```js
+app.set('view engine', 'pug')
+```
 
-以下の内容で `index.jade` という Jade テンプレート・ファイルを `views` ディレクトリーに作成します。
+以下の内容で `index.pug` という Pug テンプレート・ファイルを `views` ディレクトリーに作成します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 html
   head
-    title!= title
+    title= title
   body
-    h1!= message
-</code>
-</pre>
+    h1= message
+```
 
-次に、`index.jade` ファイルをレンダリングするためのルートを作成します。`view engine` プロパティーが設定されていない場合は、`view` ファイルの拡張子を指定する必要があります。そうでない場合は、省略できます。
+Create a route to render the `index.pug` file. If the `view engine` property is not set,
+you must specify the extension of the `view` file. Otherwise, you can omit it.
 
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
 
-ホーム・ページに要求すると、`index.jade` ファイルは HTML としてレンダリングされます。
+ホーム・ページに要求すると、`index.pug` ファイルは HTML としてレンダリングされます。
 
-Express でのテンプレート・エンジンの動作について詳しくは、[Express 用のテンプレート・エンジンの開発](/{{ page.lang }}/advanced/developing-template-engines.html)を参照してください。
+注：view engine のキャッシュは、テンプレートの出力内容をキャッシュしません。基本となるテンプレート自体だけです。このビューは、キャッシュがオンの場合でも、すべてのリクエストで再レンダリングされます。 The view is still re-rendered with every request even when the cache is on.

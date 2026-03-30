@@ -3,22 +3,53 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "eslint --ext md en/"
+    "test": "eslint --ignore-path .gitignore --ignore-pattern _includes/readmes/ \"**/*.md\""
   },
   "devDependencies": {
-    "eslint": "^3.7.1",
-    "eslint-config-standard": "^6.2.0",
-    "eslint-plugin-markdown": "^1.0.0-beta.2",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint": "^8.54.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-markdown": "^2.2.1",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.6.0"
   },
   "eslintConfig": {
-    "extends": "standard",
-    "plugins": ["markdown"],
-    "rules": {
-      "handle-callback-err": 0,
-      "no-undef": 0,
-      "no-unused-vars": 0
-    }
+    "extends": [
+      "standard",
+      "plugin:markdown/recommended"
+    ],
+    "plugins": [
+      "markdown"
+    ],
+    "overrides": [
+      {
+        "files": "**/*.md",
+        "processor": "markdown/markdown"
+      },
+      {
+        "files": "**/*.md/*.js",
+        "rules": {
+          "array-callback-return": "off",
+          "no-var": "error",
+          "n/handle-callback-err": "off",
+          "object-shorthand": "error",
+          "prefer-arrow-callback": "error",
+          "prefer-template": "error"
+        }
+      },
+      {
+        "files": [
+          "**/3x/*.md/*.js",
+          "**/4x/*.md/*.js",
+          "**/guide/migrating-4.md/*.js"
+        ],
+        "rules": {
+          "no-var": "off",
+          "object-shorthand": "off",
+          "prefer-arrow-callback": "off",
+          "prefer-template": "off"
+        }
+      }
+    ]
   }
 }

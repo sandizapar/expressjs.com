@@ -1,47 +1,47 @@
 ---
 layout: page
 title: Express 用のテンプレート・エンジンの開発
+description: Learn how to develop custom template engines for Express.js using app.engine(), with examples on creating and integrating your own template rendering logic.
 menu: advanced
-lang: ja
+order: 1
+redirect_from: "  "
 ---
 
 # Express 用のテンプレート・エンジンの開発
 
-独自のテンプレート・エンジンを作成するには、`app.engine(ext, callback)` メソッドを使用します。`ext` はファイル拡張子を表し、`callback` はテンプレート・エンジン関数です。この関数は、ファイルのロケーション、options オブジェクト、およびコールバック関数の項目をパラメーターとして受け入れます。
+独自のテンプレート・エンジンを作成するには、`app.engine(ext, callback)` メソッドを使用します。`ext` はファイル拡張子を表し、`callback` はテンプレート・エンジン関数です。この関数は、ファイルのロケーション、options オブジェクト、およびコールバック関数の項目をパラメーターとして受け入れます。 `ext` refers to the file extension, and `callback` is the template engine function, which accepts the following items as parameters: the location of the file, the options object, and the callback function.
 
 次のコードは、`.ntl` ファイルをレンダリングするための極めて単純なテンプレート・エンジンを実装する例です。
 
-<pre>
-<code class="language-javascript" translate="no">
-var fs = require('fs'); // this engine requires the fs module
-app.engine('ntl', function (filePath, options, callback) { // define the template engine
-  fs.readFile(filePath, function (err, content) {
-    if (err) return callback(new Error(err));
+```js
+const fs = require('fs') // this engine requires the fs module
+app.engine('ntl', (filePath, options, callback) => { // define the template engine
+  fs.readFile(filePath, (err, content) => {
+    if (err) return callback(err)
     // this is an extremely simple template engine
-    var rendered = content.toString().replace('#title#', '<title>'+ options.title +'</title>')
-    .replace('#message#', '<h1>'+ options.message +'</h1>');
-    return callback(null, rendered);
-  });
-});
-app.set('views', './views'); // specify the views directory
-app.set('view engine', 'ntl'); // register the template engine
-</code>
-</pre>
+    const rendered = content.toString()
+      .replace('#title#', `<title>${options.title}</title>`)
+      .replace('#message#', `<h1>${options.message}</h1>`)
+    return callback(null, rendered)
+  })
+})
+app.set('views', './views') // specify the views directory
+app.set('view engine', 'ntl') // register the template engine
+```
 
-これで、アプリケーションは `.ntl` ファイルをレンダリングできるようになります。以下のコンテンツで `index.ntl` というファイルを `views` ディレクトリーに作成します。
+Your app will now be able to render `.ntl` files. これで、アプリケーションは `.ntl` ファイルをレンダリングできるようになります。以下のコンテンツで `index.ntl` というファイルを `views` ディレクトリーに作成します。
 
-<pre>
-<code class="language-javascript" translate="no">
+```pug
 #title#
 #message#
-</code>
-</pre>
+```
+
 次に、アプリケーションで次のルートを作成します。
-<pre>
-<code class="language-javascript" translate="no">
-app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
-});
-</code>
-</pre>
+
+```js
+app.get('/', (req, res) => {
+  res.render('index', { title: 'Hey', message: 'Hello there!' })
+})
+```
+
 ホーム・ページに要求すると、`index.ntl` ファイルは HTML としてレンダリングされます。

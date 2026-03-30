@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!---
- Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
- License: MIT
--->
-<html lang="{{ page.lang }}">
+<html class="light-mode" lang="{{ page.lang }}">
 
   {% include head.html %}
 
@@ -11,15 +7,23 @@
   <body class="en-doc">
   {% else %}
   <body class="non-en-doc">
-    <div id="i18n-notice-box" class="doc-box doc-warn">
-      {% include i18n-notice.html %}
-    </div>
   {% endif %}
 
-    {{ content }}
+    {% include header.html %}
 
-    {% include footer/footer-{{ page.lang }}.html %}
+    <div id="overlay"></div>
 
+    {% if page.lang != 'en' %}
+        <div id="i18n-notice-box" class="doc-notice" hidden>
+          {% include i18n-notice.html %}
+        </div>
+    {% endif %}
+
+    <main class="home">
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
   </body>
 
 </html>

@@ -1,10 +1,14 @@
+<button id="menu-toggle" title="show table of content">On this page</button>
 <ul id="menu">
-
     <li id="express-api"><a href="#express">express()</a>
     <ul id="express-menu">
         <li><em>Methods</em></li>
-        <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
+        <li id="express-json-middleware"><a href="#express.json">express.json()</a></li>
+        <li id="express-raw"><a href="#express.raw">express.raw()</a></li>
         <li id="express-router"><a href="#express.router">express.Router()</a></li>
+        <li id="express-static-middleware"><a href="#express.static">express.static()</a></li>
+        <li id="express-text"><a href="#express.text">express.text()</a></li>
+        <li id="express-urlencoded-middleware"><a href="#express.urlencoded">express.urlencoded()</a></li>
     </ul>
     </li>
 
@@ -94,6 +98,8 @@
             </li>
             <li><a href="#req.query">req.query</a>
             </li>
+            <li><a href="#req.res">req.res</a>
+            </li>
             <li><a href="#req.route">req.route</a>
             </li>
             <li><a href="#req.secure">req.secure</a>
@@ -130,7 +136,7 @@
         <ul id="res-menu">
             <li><em>Properties</em>
             </li>
-            <li><a href="#res.app">res.app      </a>
+            <li><a href="#res.app">res.app</a>
             </li>
             <li><a href="#res.headersSent">res.headersSent</a>
             </li>
@@ -199,3 +205,4 @@
         </ul>
     </li>
 </ul>
+

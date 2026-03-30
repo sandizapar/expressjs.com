@@ -1,0 +1,30 @@
+name: Crowdin Upload
+
+on:
+  push:
+    branches: [ gh-pages ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  synchronize-with-crowdin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: crowdin action
+        uses: crowdin/github-action@8818ff65bfc4322384f983ea37e3926948c11745 # https://github.com/crowdin/github-action/releases/tag/v2.15.0
+        with:
+          upload_sources: true
+          upload_translations: false
+          download_translations: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

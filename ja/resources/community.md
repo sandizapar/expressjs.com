@@ -1,34 +1,89 @@
 ---
 layout: page
 title: Express のコミュニティー
+description: Connect with the Express.js community, learn about the technical committee, find resources, explore community-contributed modules, and get involved in discussions.
 menu: resources
-lang: ja
+order: 1
+redirect_from: "  "
 ---
 
 # コミュニティー
 
-## メーリング・リスト
+## Technical committee
 
-[Google グループ](https://groups.google.com/group/express-js)で、2000 名を超える Express ユーザーの中に参加したり、5000 件を超えるディスカッションを参照したりすることができます。
+The Express technical committee meets online every two weeks (as needed) to discuss development and maintenance of Express,
+and other issues relevant to the Express project. Each meeting is typically announced in an
+[expressjs/discussions issue](https://github.com/expressjs/discussions/issues) with a link to join or view the meeting, which is
+open to all observers.
 
-## Gitter
+The meetings are recorded; for a list of the recordings, see the [Express.js YouTube channel](https://www.youtube.com/channel/UCYjxjAeH6TRik9Iwy5nXw7g).
 
-[strongloop/express chatroom](https://gitter.im/strongloop/express) は、Express に関連する日常的なディスカッションに参加したい開発者に適しています。
+Members of the Express technical committee are:
 
-## IRC チャネル
+**Active:**
 
-毎日、数百名の開発者が #express on freenode で時間を過ごしています。
-フレームワークに関する質問がある場合は、すぐに参加してください。フィードバックを素早く得られます。
+- [@blakeembrey](https://github.com/blakeembrey) - Blake Embrey
+- [@crandmck](https://github.com/crandmck) - Rand McKinney
+- [@LinusU](https://github.com/LinusU) - Linus Unnebäck
+- [@ulisesgascon](https://github.com/ulisesGascon) - Ulises Gascón
+- [@sheplu](https://github.com/sheplu) - Jean Burellier
+- [@wesleytodd](https://github.com/wesleytodd) - Wes Todd
+- [@jonchurch](https://github.com/jonchurch) - Jon Church
+- [@ctcpip](https://github.com/ctcpip/) - Chris de Almeida
 
-## 例
+**Inactive:**
 
-API の設計や認証からテンプレート・エンジンの統合まで、あらゆるものを扱っている数十の Express アプリケーションの[例](https://github.com/strongloop/express/tree/master/examples)をリポジトリーでご覧ください。
+- [@dougwilson](https://github.com/dougwilson) - Douglas Wilson
+- [@hacksparrow](https://github.com/hacksparrow) - Hage Yaapa
+- [@jonathanong](https://github.com/jonathanong) - jongleberry
+- [@niftylettuce](https://github.com/niftylettuce) - niftylettuce
+- [@troygoode](https://github.com/troygoode) - Troy Goode
+
+## Express is made of many modules
+
+この活気あるコミュニティーでは、さまざまな拡張機能、[ミドルウェア・モジュール](/{{ page.lang }}/resources/middleware.html)、高水準のフレームワークが作成されています。[Wiki](https://github.com/expressjs/express/wiki) で確認してください。
+
+Additionally, the Express community maintains modules in these two GitHub orgs:
+
+- [jshttp](https://github.com/jshttp) modules providing useful utility functions; see [Utility modules](/{{ page.lang }}/resources/utils.html).
+- [pillarjs](https://github.com/pillarjs): low-level modules that Express uses internally.
+
+To keep up with what is going on in the whole community, check out the [ExpressJS StatusBoard](https://expressjs.github.io/statusboard/).
 
 ## 問題
 
-バグに思われるものが見つかったり、単に機能を要求したりする場合は、[問題のキュー](https://github.com/strongloop/express/issues)でチケットをオープンしてください。
+バグに思われるものが見つかったり、単に機能を要求したりする場合は、[問題のキュー](https://github.com/expressjs/express/issues)でチケットをオープンしてください。
 
-## サード・パーティー
+## 例
 
-この活気あるコミュニティーでは、さまざまな拡張機能、[ミドルウェア・モジュール](/{{ page.lang }}/resources/middleware.html)、高水準のフレームワークが作成されています。[Wiki](https://github.com/strongloop/express/wiki) で確認してください。
+API の設計や認証からテンプレート・エンジンの統合まで、あらゆるものを扱っている数十の Express アプリケーションの[例](https://github.com/expressjs/express/tree/master/examples)をリポジトリーでご覧ください。
 
+## Github Discussions
+
+The [GitHub Discussions](https://github.com/expressjs/discussions) section is an excellent space to engage in conversations about the development and maintenance of Express, as well as to share ideas and discuss topics related to its usage.
+
+# Branding of Express.js
+
+## Express.js Logo
+
+Express is a project of the OpenJS Foundation. Please review the [trademark policy](https://trademark-policy.openjsf.org/) for information about permissible use of Express.js logos and marks.
+
+<div class="logo-table">
+    <div>
+        <h3>Logotype</h3><a href="/images/brand/logotype-light.svg" class="hidden-dark">
+            <img src="/images/brand/logotype-light.svg" alt="Express.js logo" width="250" height="56"/>
+        </a>
+        <a href="/images/brand/logotype-dark.svg" class="hidden-light">
+            <img src="/images/brand/logotype-dark.svg" alt="Express.js logo" width="250" height="56"/>
+        </a>
+    </div>
+    <div>
+        <h3>Logomark</h3><a href="/images/brand/logo-light.svg" class="hidden-dark">
+            <img src="/images/brand/logo-light.svg" alt="Express.js mark" width="96.5" height="56"/>
+        </a>
+        <a href="/images/brand/logo-dark.svg" class="hidden-light">
+            <img src="/images/brand/logo-dark.svg"  alt="Express.js mark" width="96.5" height="56"/>
+        </a>
+    </div>
+<div>
+</div>
